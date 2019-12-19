@@ -1,0 +1,42 @@
+{
+    "name": "Johns Hopkins University",
+    "description": "<p>Johns Hopkins University provides a Hub API, opening up API access to several campus resources including articles, events, galleries, issues, divisions, locations, tags, and topics as simple API endpoints with documentation. Not much else is provide via the portal.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/johns-hopkins-university-logo.gif",
+    "tags": [
+        "api provider",
+        "have api",
+        "universities",
+        "university in progress"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/johns-hopkins-university\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Johns Hopkins University",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/logos\/johns-hopkins-university-logo.gif",
+            "humanURL": "https:\/\/www.jhu.edu\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/johns-hopkins-university-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Developers",
+            "url": "https:\/\/api.hub.jhu.edu\/docs"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.jhu.edu\/"
+        }
+    ]
+}
