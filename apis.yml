@@ -1,0 +1,88 @@
+---
+aid: johns-hopkins-university
+name: Johns Hopkins University
+description: >-
+  Johns Hopkins University is a private research university in Baltimore, Maryland,
+  ranked #22 in the QS World University Rankings 2025. It maintains a real public
+  developer footprint: the Hub API serves news, announcements, events, photo
+  galleries, and faculty experts from the university Hub database, and the
+  Self-Service Public Course Search API (SIS) returns course catalog data in JSON.
+  A central MuleSoft-based API Portal (api.jh.edu) governs integration APIs but is
+  gated to JHU affiliates. The university also operates numerous public GitHub
+  organizations across its libraries, data services, and research centers.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Course Catalog
+  - News
+  - United States
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: johns-hopkins-university:hub
+    name: JHU Hub API
+    description: >-
+      REST API exposing data from the Hub database, a central repository of news
+      articles, announcements, photo galleries, faculty experts, and events. Built
+      to power the Hub website and reused across JHU schools, divisions, and
+      centers. Access requires requesting a key as a JHU affiliate.
+    humanURL: https://api.hub.jhu.edu/docs/
+    baseURL: https://api.hub.jhu.edu
+    tags: [ News, Events, Faculty Experts, Content ]
+    properties:
+      - type: Documentation
+        url: https://api.hub.jhu.edu/docs/
+  - aid: johns-hopkins-university:sis-course-search
+    name: Self-Service Public Course Search API (SIS)
+    description: >-
+      Returns, in JSON, the list of courses available through the JHU Public Course
+      Search. Results can be filtered by school, department, course number, section
+      number, and academic term, or via a custom query string. All requests require
+      an API key parameter.
+    humanURL: https://sis.jhu.edu/api
+    baseURL: https://sis.jhu.edu/api
+    tags: [ Course Catalog, Education, Student Information System ]
+    properties:
+      - type: Documentation
+        url: https://sis.jhu.edu/api
+      - type: Documentation
+        url: https://sis.jhu.edu/api/help
+  - aid: johns-hopkins-university:api-portal
+    name: JHU API Portal (MuleSoft Anypoint)
+    description: >-
+      Central API management platform built on MuleSoft Anypoint, where JHU
+      developers and consumers view and request access to integration APIs. Gated to
+      Johns Hopkins affiliates rather than open to the public.
+    humanURL: https://api.jh.edu/
+    tags: [ Integration, Gated, MuleSoft ]
+    properties:
+      - type: Documentation
+        url: https://api.jh.edu/
+common:
+  - type: Website
+    url: https://www.jhu.edu/
+  - type: DeveloperPortal
+    url: https://api.jh.edu/
+  - type: GitHub
+    url: https://github.com/jhu-sheridan-libraries
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/johns-hopkins-university/
+  - type: Plans
+    url: plans/johns-hopkins-university-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/johns-hopkins-university-rate-limits.yml
+  - type: FinOps
+    url: finops/johns-hopkins-university-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

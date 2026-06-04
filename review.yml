@@ -1,0 +1,40 @@
+---
+name: Johns Hopkins University
+description: Johns Hopkins University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      JHU has a genuine, documented public API footprint. The Hub API
+      (api.hub.jhu.edu/docs) and the Self-Service Public Course Search API
+      (sis.jhu.edu/api) are both documented and live; both require an API key, and
+      Hub key issuance is limited to JHU affiliates. The central api.jh.edu portal
+      resolves but is a gated MuleSoft Anypoint platform for affiliates only. No
+      endpoints were fabricated: SIS /api/classes returned 500 when probed without a
+      key (expected), and the Hub docs path 302-redirects. Rating reflects real but
+      partly gated, key-restricted access.
+    endpoints:
+      - url: https://api.jh.edu/
+        status: 200
+        note: Central MuleSoft API Portal; gated to JHU affiliates.
+      - url: https://api.hub.jhu.edu/docs/
+        status: 302
+        note: Hub API documentation; redirects, docs live. Key request required.
+      - url: https://sis.jhu.edu/api
+        status: 200
+        note: Self-Service Public Course Search API docs; live.
+      - url: https://sis.jhu.edu/api/classes
+        status: 500
+        note: Course search endpoint; 500 without required API key (expected).
+      - url: https://hopgpt.it.jh.edu/api-instructions/
+        status: 403
+        note: HopGPT AI API instructions; access restricted.
+      - url: https://github.com/jhu-sheridan-libraries
+        status: 200
+        note: Public JHU Sheridan Libraries GitHub organization.
+      - url: https://www.jhu.edu/
+        status: 403
+        note: Official website; 403 to automated probe, valid in browser.
