@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/main/json-schema/johns-hopkins-university-course-schema.json",
+  "title": "Course",
+  "description": "A course offering record returned by the JHU SIS Self-Service Public Course Search API.",
+  "type": "object",
+  "properties": {
+    "AllDepartments": { "type": "string", "description": "All departments assigned to the course, separated by ^." },
+    "Areas": { "type": "string", "description": "All areas assigned to the course, separated by ^." },
+    "Building": { "type": "string", "description": "All buildings where the course is held, separated by ^." },
+    "CoursePrefix": { "type": "string" },
+    "Credits": { "type": "string" },
+    "Department": { "type": "string", "description": "Department that offers the course." },
+    "DOW": { "type": "string", "description": "Numeric representation of days of week (Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64)." },
+    "DOWSort": { "type": "string" },
+    "HasBio": { "type": "string" },
+    "InstructionMethod": { "type": "string" },
+    "Instructors": { "type": "string" },
+    "InstructorsFullName": { "type": "string" },
+    "IsWritingIntensive": { "type": "string" },
+    "Level": { "type": "string" },
+    "Location": { "type": "string" },
+    "MaxSeats": { "type": "string" },
+    "Meetings": { "type": "string" },
+    "OfferingName": { "type": "string", "description": "Offering name (e.g. NR.110.305)." },
+    "OpenSeats": { "type": "string" },
+    "Repeatable": { "type": "string" },
+    "SchoolName": { "type": "string" },
+    "SeatsAvailable": { "type": "string", "description": "Available seats out of maximum (e.g. 7/65)." },
+    "SectionCoReqNotes": { "type": "string" },
+    "SectionCoRequisites": { "type": "string" },
+    "SectionName": { "type": "string" },
+    "SectionRegRestrictions": { "type": "string" },
+    "Status": { "type": "string" },
+    "SubDepartment": { "type": "string" },
+    "Term": { "type": "string" },
+    "Term_IDR": { "type": "string" },
+    "Term_JSS": { "type": "string" },
+    "TermStartDate": { "type": "string" },
+    "TimeOfDay": { "type": "string" },
+    "Title": { "type": "string" },
+    "Waitlisted": { "type": "string" },
+    "SectionDetails": {
+      "type": "object",
+      "description": "Section detail information returned when a full section is requested.",
+      "properties": {
+        "Credits": { "type": "string" },
+        "CreditType": { "type": "string" },
+        "Departments": { "type": "string" },
+        "DepartmentID": { "type": "string" },
+        "Description": { "type": "string" },
+        "WebNotes": { "type": "string" },
+        "CoRequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Description": { "type": "string" },
+              "Expression": { "type": "string" },
+              "TermName": { "type": "string" }
+            }
+          }
+        },
+        "EvaluationUrls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "URL": { "type": "string" },
+              "ValidFrom": { "type": "string" },
+              "ValidTo": { "type": "string" }
+            }
+          }
+        },
+        "Fees": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Amount": { "type": "string" },
+              "FeeType": { "type": "string" }
+            }
+          }
+        },
+        "Meetings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Building": { "type": "string" },
+              "Dates": { "type": "string" },
+              "DOW": { "type": "string" },
+              "Location": { "type": "string" },
+              "Room": { "type": "string" },
+              "Times": { "type": "string" }
+            }
+          }
+        },
+        "PosTags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "Tag": { "type": "string" } }
+          }
+        },
+        "Prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Description": { "type": "string" },
+              "Expression": { "type": "string" },
+              "IsNegative": { "type": "string" }
+            }
+          }
+        },
+        "Instructors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "HopkinsID": { "type": "string" } }
+          }
+        },
+        "Equivalencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "CourseName": { "type": "string" },
+              "ValidFrom": { "type": "string" },
+              "ValidTo": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

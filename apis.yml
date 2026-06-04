@@ -55,6 +55,22 @@ apis:
         url: https://sis.jhu.edu/api
       - type: Documentation
         url: https://sis.jhu.edu/api/help
+      - type: OpenAPI
+        url: openapi/johns-hopkins-university-sis-course-search.yaml
+      - type: JSONSchema
+        url: json-schema/johns-hopkins-university-course-schema.json
+      - type: JSONStructure
+        url: json-structure/johns-hopkins-university-course-structure.json
+      - type: x-example
+        url: examples/johns-hopkins-university-advanced-search-example.json
+      - type: x-example
+        url: examples/johns-hopkins-university-schools-example.json
+      - type: x-rules
+        url: rules/johns-hopkins-university-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/johns-hopkins-university-vocabulary.yml
+      - type: x-json-ld
+        url: json-ld/johns-hopkins-university-context.jsonld
   - aid: johns-hopkins-university:api-portal
     name: JHU API Portal (MuleSoft Anypoint)
     description: >-

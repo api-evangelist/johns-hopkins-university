@@ -1,0 +1,68 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://sis.jhu.edu/api/classes?key=YOUR_API_KEY&School=Whiting%20School%20of%20Engineering&Term=Fall%202013&WritingIntensive=No"
+  },
+  "response": [
+    {
+      "OfferingName": "EN.601.220",
+      "SectionName": "01",
+      "Title": "Intermediate Programming",
+      "SchoolName": "Whiting School of Engineering",
+      "Department": "EN Computer Science",
+      "AllDepartments": "EN Computer Science",
+      "SubDepartment": "",
+      "Areas": "E",
+      "Credits": "4.00",
+      "Level": "Lower Level Undergraduate",
+      "InstructionMethod": "Lecture",
+      "Instructors": "Smith, J",
+      "InstructorsFullName": "Smith, Jane",
+      "HasBio": "Yes",
+      "Building": "Hodson Hall",
+      "Location": "Homewood Campus",
+      "Meetings": "MWF 1:30PM - 2:20PM",
+      "DOW": "21",
+      "DOWSort": "21133000",
+      "TimeOfDay": "afternoon",
+      "Status": "Open",
+      "MaxSeats": "65",
+      "OpenSeats": "7",
+      "SeatsAvailable": "7/65",
+      "Waitlisted": "No",
+      "Repeatable": "No",
+      "IsWritingIntensive": "No",
+      "Term": "Fall 2013",
+      "Term_IDR": "FA13",
+      "Term_JSS": "Fall 2013",
+      "TermStartDate": "9/3/2013",
+      "CoursePrefix": "EN",
+      "SectionDetails": {
+        "Credits": "4.00",
+        "CreditType": "none",
+        "Departments": "EN Computer Science",
+        "DepartmentID": "601",
+        "Description": "This course covers intermediate programming concepts and data structures using C/C++.",
+        "WebNotes": "Prior programming experience recommended.",
+        "Meetings": [
+          {
+            "Building": "Hodson Hall",
+            "Room": "210",
+            "Location": "Homewood Campus",
+            "Dates": "9/3/2013 - 12/6/2013",
+            "Times": "1:30PM - 2:20PM",
+            "DOW": "21"
+          }
+        ],
+        "Fees": [],
+        "Prerequisites": [
+          {
+            "Description": "Introductory Programming",
+            "Expression": "EN.601.107",
+            "IsNegative": "No"
+          }
+        ]
+      }
+    }
+  ]
+}

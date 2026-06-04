@@ -1,0 +1,60 @@
+---
+vocabulary:
+  name: JHU SIS Public Course Search Vocabulary
+  description: >-
+    Controlled vocabulary for the Johns Hopkins University Self-Service Public
+    Course Search API, derived from the official SIS Web API help page and data
+    dictionary at https://sis.jhu.edu/api/help.
+  version: "1.0.0"
+  terms:
+    - term: School
+      definition: >-
+        A degree-granting division of the university (e.g. Whiting School of
+        Engineering). Used as a filter and returned as SchoolName.
+      tags: [reference, filter]
+    - term: Department
+      definition: The academic department within a school that offers the course.
+      tags: [reference, filter]
+    - term: Term
+      definition: >-
+        An academic term name such as "Fall 2013". Available range spans Spring
+        2009 to one year in the future from the current term.
+      tags: [reference, filter]
+    - term: OfferingName
+      definition: The canonical course offering identifier (e.g. NR.110.305).
+      tags: [course, identifier]
+    - term: SectionName
+      definition: The section identifier within a course offering (e.g. 0101).
+      tags: [section, identifier]
+    - term: Course Number
+      definition: >-
+        The course number, optionally with section, formatted as ASxxxyyyzz.
+        At least the first 3 characters are required when searching.
+      tags: [course, identifier, query]
+    - term: DOW
+      definition: >-
+        Numeric representation of the days of week a class meets, computed as
+        the sum of day ranks Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64.
+      tags: [schedule, encoding]
+    - term: SeatsAvailable
+      definition: Open seats over maximum seats, formatted as "open/max" (e.g. 7/65).
+      tags: [enrollment]
+    - term: IsWritingIntensive
+      definition: Yes/No flag indicating whether a course is writing intensive.
+      tags: [attribute]
+    - term: TimeOfDay
+      definition: Coarse meeting period of the course - morning, afternoon, evening, or other.
+      tags: [schedule, filter]
+    - term: InstructionMethod
+      definition: The delivery method of the section (e.g. Lecture).
+      tags: [attribute]
+    - term: SectionDetails
+      definition: >-
+        Nested record returned for a fully specified section, containing
+        description, meetings, fees, prerequisites, instructors, and equivalencies.
+      tags: [section, detail]
+    - term: API Key
+      definition: >-
+        The required `key` query-string credential issued after registering a
+        valid email address at the SIS API help page.
+      tags: [auth, access]

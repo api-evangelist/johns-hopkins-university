@@ -1,0 +1,63 @@
+---
+# Spectral ruleset encoding patterns observed in the JHU SIS Public Course
+# Search API. Apply against the OpenAPI in this repo with:
+#   spectral lint openapi/johns-hopkins-university-sis-course-search.yaml \
+#     --ruleset rules/johns-hopkins-university-rules.yml
+formats:
+  - oas3
+rules:
+  jhu-info-contact:
+    description: API info should include a contact pointing to the SIS help page.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  jhu-server-https:
+    description: SIS servers must use HTTPS on the sis.jhu.edu host.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://sis\\.jhu\\.edu/api"
+
+  jhu-requires-api-key:
+    description: Every operation must require the apiKey security scheme.
+    severity: error
+    given: $.paths[*][get]
+    then:
+      field: security
+      function: truthy
+
+  jhu-key-query-param:
+    description: The API key is passed via the query parameter named "key".
+    severity: error
+    given: $.components.securitySchemes.apiKey
+    then:
+      - field: in
+        function: pattern
+        functionOptions:
+          match: "^query$"
+      - field: name
+        function: pattern
+        functionOptions:
+          match: "^key$"
+
+  jhu-operationid-present:
+    description: Operations should declare an operationId.
+    severity: warn
+    given: $.paths[*][get]
+    then:
+      field: operationId
+      function: truthy
+
+  jhu-pascalcase-properties:
+    description: Course/section field names use PascalCase as returned by SIS.
+    severity: info
+    given: $.components.schemas.Course.properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9_]*$"

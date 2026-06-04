@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/main/json-structure/johns-hopkins-university-course-structure.json",
+  "name": "Course",
+  "description": "JSON Structure for a JHU SIS Public Course Search course offering record.",
+  "type": "object",
+  "properties": {
+    "OfferingName": { "type": "string", "description": "Offering name (e.g. NR.110.305)." },
+    "SectionName": { "type": "string" },
+    "Title": { "type": "string" },
+    "SchoolName": { "type": "string" },
+    "Department": { "type": "string" },
+    "AllDepartments": { "type": "string" },
+    "SubDepartment": { "type": "string" },
+    "Areas": { "type": "string" },
+    "Credits": { "type": "string" },
+    "Level": { "type": "string" },
+    "InstructionMethod": { "type": "string" },
+    "Instructors": { "type": "string" },
+    "InstructorsFullName": { "type": "string" },
+    "HasBio": { "type": "string" },
+    "Building": { "type": "string" },
+    "Location": { "type": "string" },
+    "Meetings": { "type": "string" },
+    "DOW": { "type": "string" },
+    "DOWSort": { "type": "string" },
+    "TimeOfDay": { "type": "string" },
+    "Status": { "type": "string" },
+    "MaxSeats": { "type": "string" },
+    "OpenSeats": { "type": "string" },
+    "SeatsAvailable": { "type": "string" },
+    "Waitlisted": { "type": "string" },
+    "Repeatable": { "type": "string" },
+    "IsWritingIntensive": { "type": "string" },
+    "Term": { "type": "string" },
+    "Term_IDR": { "type": "string" },
+    "Term_JSS": { "type": "string" },
+    "TermStartDate": { "type": "string" },
+    "CoursePrefix": { "type": "string" },
+    "SectionCoRequisites": { "type": "string" },
+    "SectionCoReqNotes": { "type": "string" },
+    "SectionRegRestrictions": { "type": "string" },
+    "SectionDetails": {
+      "type": "object",
+      "description": "Section detail set, present when a full section is requested.",
+      "properties": {
+        "Credits": { "type": "string" },
+        "CreditType": { "type": "string" },
+        "Departments": { "type": "string" },
+        "DepartmentID": { "type": "string" },
+        "Description": { "type": "string" },
+        "WebNotes": { "type": "string" },
+        "Meetings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Building": { "type": "string" },
+              "Room": { "type": "string" },
+              "Location": { "type": "string" },
+              "Dates": { "type": "string" },
+              "Times": { "type": "string" },
+              "DOW": { "type": "string" }
+            }
+          }
+        },
+        "Fees": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Amount": { "type": "string" },
+              "FeeType": { "type": "string" }
+            }
+          }
+        },
+        "Prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Description": { "type": "string" },
+              "Expression": { "type": "string" },
+              "IsNegative": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

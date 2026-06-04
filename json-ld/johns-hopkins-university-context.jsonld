@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "jhu": "https://www.jhu.edu/ns#",
+    "sis": "https://sis.jhu.edu/api/ns#",
+    "name": "name",
+    "url": "url",
+    "Organization": "CollegeOrUniversity",
+    "institution": {
+      "@id": "jhu:institution",
+      "@type": "CollegeOrUniversity"
+    },
+    "Course": {
+      "@id": "Course",
+      "@type": "@id"
+    },
+    "OfferingName": "courseCode",
+    "Title": "name",
+    "SchoolName": "provider",
+    "Department": "department",
+    "Credits": "numberOfCredits",
+    "Instructors": {
+      "@id": "instructor",
+      "@type": "Person"
+    },
+    "InstructorsFullName": "instructor",
+    "Level": "educationalLevel",
+    "InstructionMethod": "courseMode",
+    "Term": "academicTerm",
+    "Location": "location",
+    "Building": "location",
+    "Meetings": "eventSchedule",
+    "MaxSeats": "maximumAttendeeCapacity",
+    "OpenSeats": "remainingAttendeeCapacity",
+    "Prerequisites": "coursePrerequisites",
+    "Description": "description",
+    "isPartOf": {
+      "@id": "isPartOf",
+      "@type": "@id"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "Johns Hopkins University",
+  "url": "https://www.jhu.edu/",
+  "sameAs": [
+    "https://en.wikipedia.org/wiki/Johns_Hopkins_University",
+    "https://www.linkedin.com/school/johns-hopkins-university/"
+  ],
+  "subjectOf": [
+    {
+      "@type": "WebAPI",
+      "name": "Self-Service Public Course Search API (SIS)",
+      "url": "https://sis.jhu.edu/api/help",
+      "documentation": "https://sis.jhu.edu/api/help"
+    },
+    {
+      "@type": "WebAPI",
+      "name": "JHU Hub API",
+      "url": "https://api.hub.jhu.edu/docs/"
+    }
+  ]
+}
