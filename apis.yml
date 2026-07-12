@@ -83,6 +83,10 @@ apis:
       - type: Documentation
         url: https://api.jh.edu/
 common:
+  - type: DomainSecurity
+    url: security/johns-hopkins-university-domain-security.yml
+  - type: Authentication
+    url: authentication/johns-hopkins-university-authentication.yml
   - type: Website
     url: https://www.jhu.edu/
   - type: DeveloperPortal
