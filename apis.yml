@@ -83,6 +83,8 @@ apis:
       - type: Documentation
         url: https://api.jh.edu/
 common:
+  - type: AgenticAccess
+    url: agentic-access/johns-hopkins-university-agentic-access.yml
   - type: DomainSecurity
     url: security/johns-hopkins-university-domain-security.yml
   - type: Authentication
