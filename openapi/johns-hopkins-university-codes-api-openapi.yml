@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Self-Service Public Course Search API (SIS) Classes Codes API
+  description: Returns, in JSON format, a list of courses available through the Johns Hopkins University Public Course Search (https://sis.jhu.edu/classes). Results can be filtered by school, department, course number, section number, and academic term, or via a custom advanced-search query string. All requests require an API key supplied as the `key` query parameter. Endpoints, parameters and the response data dictionary are derived from the official SIS Web API Help page at https://sis.jhu.edu/api/help.
+  version: 1.0.0
+  contact:
+    name: SIS Development Team, Johns Hopkins University
+    url: https://sis.jhu.edu/api/help
+servers:
+- url: https://sis.jhu.edu/api
+  description: SIS Public Course Search API
+security:
+- apiKey: []
+tags:
+- name: Codes
+  description: Reference code lists (schools, terms, departments).
+paths:
+  /classes/codes/schools:
+    get:
+      tags:
+      - Codes
+      operationId: listSchools
+      summary: List all available schools
+      parameters:
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: List of available school names.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/codes/terms:
+    get:
+      tags:
+      - Codes
+      operationId: listTerms
+      summary: List available academic terms
+      description: Returns available academic terms. The range returned is from Spring 2009 to one year in the future from the current term.
+      parameters:
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: List of available academic terms.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/codes/departments/{school}:
+    get:
+      tags:
+      - Codes
+      operationId: listDepartments
+      summary: List departments for a school
+      description: Returns the list of all departments for the specified school. School names must be typed exactly as returned by /classes/codes/schools, with spaces encoded as %20. Department names containing a forward slash must encode it as an underscore (_).
+      parameters:
+      - $ref: '#/components/parameters/key'
+      - name: school
+        in: path
+        required: true
+        description: Exact school name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of departments for the school.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    CodeValue:
+      type: object
+      description: A reference code/value pair (school, term, or department).
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+  responses:
+    Unauthorized:
+      description: API key missing or invalid.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Unable to authenticate: API Key parameter is missing in URL'
+  parameters:
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key issued after registration at https://sis.jhu.edu/api/help.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
