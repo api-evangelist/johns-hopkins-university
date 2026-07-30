@@ -11,9 +11,22 @@ description: >-
   gated to JHU affiliates. The university also operates numerous public GitHub
   organizations across its libraries, data services, and research centers.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/johns-hopkins-university.png
 url: https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/refs/heads/main/apis.yml
 tags:
   - Education
@@ -27,61 +40,92 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: johns-hopkins-university:hub
-    name: JHU Hub API
-    description: >-
-      REST API exposing data from the Hub database, a central repository of news
-      articles, announcements, photo galleries, faculty experts, and events. Built
-      to power the Hub website and reused across JHU schools, divisions, and
-      centers. Access requires requesting a key as a JHU affiliate.
-    humanURL: https://api.hub.jhu.edu/docs/
-    baseURL: https://api.hub.jhu.edu
-    tags: [ News, Events, Faculty Experts, Content ]
-    properties:
-      - type: Documentation
-        url: https://api.hub.jhu.edu/docs/
-  - aid: johns-hopkins-university:sis-course-search
-    name: Self-Service Public Course Search API (SIS)
-    description: >-
-      Returns, in JSON, the list of courses available through the JHU Public Course
-      Search. Results can be filtered by school, department, course number, section
-      number, and academic term, or via a custom query string. All requests require
-      an API key parameter.
-    humanURL: https://sis.jhu.edu/api
-    baseURL: https://sis.jhu.edu/api
-    tags: [ Course Catalog, Education, Student Information System ]
-    properties:
-      - type: Documentation
-        url: https://sis.jhu.edu/api
-      - type: Documentation
-        url: https://sis.jhu.edu/api/help
-      - type: OpenAPI
-        url: openapi/johns-hopkins-university-sis-course-search.yaml
-      - type: JSONSchema
-        url: json-schema/johns-hopkins-university-course-schema.json
-      - type: JSONStructure
-        url: json-structure/johns-hopkins-university-course-structure.json
-      - type: x-example
-        url: examples/johns-hopkins-university-advanced-search-example.json
-      - type: x-example
-        url: examples/johns-hopkins-university-schools-example.json
-      - type: x-rules
-        url: rules/johns-hopkins-university-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/johns-hopkins-university-vocabulary.yml
-      - type: x-json-ld
-        url: json-ld/johns-hopkins-university-context.jsonld
-  - aid: johns-hopkins-university:api-portal
-    name: JHU API Portal (MuleSoft Anypoint)
-    description: >-
-      Central API management platform built on MuleSoft Anypoint, where JHU
-      developers and consumers view and request access to integration APIs. Gated to
-      Johns Hopkins affiliates rather than open to the public.
-    humanURL: https://api.jh.edu/
-    tags: [ Integration, Gated, MuleSoft ]
-    properties:
-      - type: Documentation
-        url: https://api.jh.edu/
+- aid: johns-hopkins-university:hub
+  name: JHU Hub API
+  description: >-
+    REST API exposing data from the Hub database, a central repository of news articles, announcements,
+    photo galleries, faculty experts, and events. Built to power the Hub website and reused across JHU
+    schools, divisions, and centers. Access requires requesting a key as a JHU affiliate.
+  humanURL: https://api.hub.jhu.edu/docs/
+  baseURL: https://api.hub.jhu.edu
+  tags:
+  - News
+  - Events
+  - Faculty Experts
+  - Content
+  properties:
+  - type: Documentation
+    url: https://api.hub.jhu.edu/docs/
+- aid: johns-hopkins-university:api-portal
+  name: JHU API Portal (MuleSoft Anypoint)
+  description: >-
+    Central API management platform built on MuleSoft Anypoint, where JHU developers and consumers view
+    and request access to integration APIs. Gated to Johns Hopkins affiliates rather than open to the
+    public.
+  humanURL: https://api.jh.edu/
+  tags:
+  - Integration
+  - Gated
+  - MuleSoft
+  properties:
+  - type: Documentation
+    url: https://api.jh.edu/
+- aid: johns-hopkins-university:johns-hopkins-university-classes-api
+  name: Johns Hopkins University Classes API
+  description: Course and section lookup and advanced search.
+  humanURL: https://api.hub.jhu.edu/docs/
+  baseURL: https://api.hub.jhu.edu
+  tags:
+  - Classes
+  properties:
+  - type: OpenAPI
+    url: openapi/johns-hopkins-university-classes-api-openapi.yml
+  - type: Documentation
+    url: https://sis.jhu.edu/api
+  - type: Documentation
+    url: https://sis.jhu.edu/api/help
+  - type: JSONSchema
+    url: json-schema/johns-hopkins-university-course-schema.json
+  - type: JSONStructure
+    url: json-structure/johns-hopkins-university-course-structure.json
+  - type: x-example
+    url: examples/johns-hopkins-university-advanced-search-example.json
+  - type: x-example
+    url: examples/johns-hopkins-university-schools-example.json
+  - type: x-rules
+    url: rules/johns-hopkins-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/johns-hopkins-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/johns-hopkins-university-context.jsonld
+- aid: johns-hopkins-university:johns-hopkins-university-codes-api
+  name: Johns Hopkins University Codes API
+  description: Reference code lists (schools, terms, departments).
+  humanURL: https://api.hub.jhu.edu/docs/
+  baseURL: https://api.hub.jhu.edu
+  tags:
+  - Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/johns-hopkins-university-codes-api-openapi.yml
+  - type: Documentation
+    url: https://sis.jhu.edu/api
+  - type: Documentation
+    url: https://sis.jhu.edu/api/help
+  - type: JSONSchema
+    url: json-schema/johns-hopkins-university-course-schema.json
+  - type: JSONStructure
+    url: json-structure/johns-hopkins-university-course-structure.json
+  - type: x-example
+    url: examples/johns-hopkins-university-advanced-search-example.json
+  - type: x-example
+    url: examples/johns-hopkins-university-schools-example.json
+  - type: x-rules
+    url: rules/johns-hopkins-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/johns-hopkins-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/johns-hopkins-university-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/johns-hopkins-university-agentic-access.yml
