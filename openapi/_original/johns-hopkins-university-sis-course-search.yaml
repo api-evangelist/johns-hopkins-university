@@ -1,0 +1,504 @@
+openapi: 3.0.3
+info:
+  title: Self-Service Public Course Search API (SIS)
+  description: >-
+    Returns, in JSON format, a list of courses available through the Johns
+    Hopkins University Public Course Search (https://sis.jhu.edu/classes).
+    Results can be filtered by school, department, course number, section
+    number, and academic term, or via a custom advanced-search query string.
+    All requests require an API key supplied as the `key` query parameter.
+    Endpoints, parameters and the response data dictionary are derived from
+    the official SIS Web API Help page at https://sis.jhu.edu/api/help.
+  version: "1.0.0"
+  contact:
+    name: SIS Development Team, Johns Hopkins University
+    url: https://sis.jhu.edu/api/help
+servers:
+  - url: https://sis.jhu.edu/api
+    description: SIS Public Course Search API
+security:
+  - apiKey: []
+tags:
+  - name: Codes
+    description: Reference code lists (schools, terms, departments).
+  - name: Classes
+    description: Course and section lookup and advanced search.
+paths:
+  /classes/codes/schools:
+    get:
+      tags: [Codes]
+      operationId: listSchools
+      summary: List all available schools
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: List of available school names.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/codes/terms:
+    get:
+      tags: [Codes]
+      operationId: listTerms
+      summary: List available academic terms
+      description: >-
+        Returns available academic terms. The range returned is from
+        Spring 2009 to one year in the future from the current term.
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: List of available academic terms.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/codes/departments/{school}:
+    get:
+      tags: [Codes]
+      operationId: listDepartments
+      summary: List departments for a school
+      description: >-
+        Returns the list of all departments for the specified school. School
+        names must be typed exactly as returned by /classes/codes/schools,
+        with spaces encoded as %20. Department names containing a forward
+        slash must encode it as an underscore (_).
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - name: school
+          in: path
+          required: true
+          description: Exact school name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of departments for the school.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeValue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/{courseNumber}:
+    get:
+      tags: [Classes]
+      operationId: getCoursesByNumber
+      summary: Get offered occurrences of a course number
+      description: >-
+        Returns all offered occurrences of a course number across available
+        academic terms. At least the first 3 characters of the course number
+        must be supplied; partial values return all matching courses. Supplying
+        a full course number plus section number returns section detail.
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - name: courseNumber
+          in: path
+          required: true
+          description: >-
+            Course number or partial course number (minimum 3 characters).
+            May include section number (e.g. AS.xxx.yyy.zz) to retrieve
+            section detail.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching course records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/{courseNumber}/{term}:
+    get:
+      tags: [Classes]
+      operationId: getCoursesByNumberAndTerm
+      summary: Get occurrences of a course number in a term
+      description: >-
+        Returns all offered occurrences of a course number in the specified
+        academic term. The literal value `current` may be used as the term to
+        return the current academic term.
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - name: courseNumber
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: term
+          in: path
+          required: true
+          description: Academic term name (e.g. "Fall 2013") or "current".
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching course records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes/{school}/{department}/{term}:
+    get:
+      tags: [Classes]
+      operationId: getCoursesBySchoolDepartmentTerm
+      summary: Get classes for a school, department, and term
+      description: >-
+        Returns all classes for the specified school and department in the
+        specified term. The literal value `current` may be used as the term.
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - name: school
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: department
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: term
+          in: path
+          required: true
+          description: Academic term name or "current".
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching course records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /classes:
+    get:
+      tags: [Classes]
+      operationId: advancedSearch
+      summary: Advanced course search
+      description: >-
+        Performs an advanced search using query-string criteria. Multi-select
+        criteria (School, Location, Term, Department) may be supplied more than
+        once. Values must be URL encoded.
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - name: Area
+          in: query
+          schema: { type: string }
+        - name: Building
+          in: query
+          schema: { type: string }
+        - name: CourseNumber
+          in: query
+          description: Course number or first 3+ characters.
+          schema: { type: string }
+        - name: CourseTitle
+          in: query
+          schema: { type: string }
+        - name: Credits
+          in: query
+          description: Number of credits with two decimals (e.g. 3.00).
+          schema: { type: string }
+        - name: DaysOfWeek
+          in: query
+          description: >-
+            "All|N" or "Any|N" where N is the sum of day ranks (Mon=1, Tue=2,
+            Wed=4, Thu=8, Fri=16, Sat=32, Sun=64).
+          schema: { type: string }
+        - name: Department
+          in: query
+          description: Department name (multi-select; encode "/" as "_").
+          schema: { type: string }
+        - name: Instructor
+          in: query
+          schema: { type: string }
+        - name: Level
+          in: query
+          schema: { type: string }
+        - name: Location
+          in: query
+          description: Campus location (multi-select).
+          schema: { type: string }
+        - name: School
+          in: query
+          description: School name (multi-select).
+          schema: { type: string }
+        - name: StartTimeEndTime
+          in: query
+          description: Start and end time separated by pipe (e.g. 09:00|10:15).
+          schema: { type: string }
+        - name: Status
+          in: query
+          schema: { type: string }
+        - name: Term
+          in: query
+          description: Academic term name (multi-select).
+          schema: { type: string }
+        - name: TimeOfDay
+          in: query
+          schema:
+            type: string
+            enum: [morning, afternoon, evening, other]
+        - name: WritingIntensive
+          in: query
+          schema:
+            type: string
+            enum: [Yes, No]
+      responses:
+        '200':
+          description: Matching course records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+  parameters:
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key issued after registration at https://sis.jhu.edu/api/help.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: API key missing or invalid.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: "Unable to authenticate: API Key parameter is missing in URL"
+  schemas:
+    CodeValue:
+      type: object
+      description: A reference code/value pair (school, term, or department).
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+    Course:
+      type: object
+      description: A course offering record from the Public Course Search.
+      properties:
+        AllDepartments:
+          type: string
+          description: All departments assigned to the course, separated by ^.
+        Areas:
+          type: string
+          description: All areas assigned to the course, separated by ^.
+        Building:
+          type: string
+          description: All buildings where the course is held, separated by ^.
+        CoursePrefix:
+          type: string
+        Credits:
+          type: string
+        Department:
+          type: string
+          description: Department that offers the course.
+        DOW:
+          type: string
+          description: >-
+            Numeric representation of the days of week (Mon=1, Tue=2, Wed=4,
+            Thu=8, Fri=16, Sat=32, Sun=64).
+        DOWSort:
+          type: string
+          description: DOW value plus time in military format, for sorting.
+        HasBio:
+          type: string
+          description: Indicates if instructors have Bio information to display.
+        InstructionMethod:
+          type: string
+        Instructors:
+          type: string
+          description: Names of instructors, separated by comma.
+        InstructorsFullName:
+          type: string
+        IsWritingIntensive:
+          type: string
+          description: Indicates if the course is writing intensive (Yes/No).
+        Level:
+          type: string
+        Location:
+          type: string
+        MaxSeats:
+          type: string
+        Meetings:
+          type: string
+          description: Comma separated list of days and times (e.g. M 3:30PM - 5:20PM).
+        OfferingName:
+          type: string
+          description: Offering name (e.g. NR.110.305).
+        OpenSeats:
+          type: string
+        Repeatable:
+          type: string
+        SchoolName:
+          type: string
+        SeatsAvailable:
+          type: string
+          description: Available seats out of maximum (e.g. 7/65).
+        SectionCoReqNotes:
+          type: string
+        SectionCoRequisites:
+          type: string
+        SectionName:
+          type: string
+          description: Section name (e.g. 0101).
+        SectionRegRestrictions:
+          type: string
+        Status:
+          type: string
+          description: Section status (e.g. Open).
+        SectionDetails:
+          $ref: '#/components/schemas/SectionDetail'
+        SubDepartment:
+          type: string
+        Term:
+          type: string
+        Term_IDR:
+          type: string
+        Term_JSS:
+          type: string
+        TermStartDate:
+          type: string
+        TimeOfDay:
+          type: string
+        Title:
+          type: string
+        Waitlisted:
+          type: string
+    SectionDetail:
+      type: object
+      description: Section detail information returned when a full section is requested.
+      properties:
+        CoRequisites:
+          type: array
+          items:
+            type: object
+            properties:
+              Description:
+                type: string
+              Expression:
+                type: string
+              TermName:
+                type: string
+        Credits:
+          type: string
+        CreditType:
+          type: string
+        Departments:
+          type: string
+        DepartmentID:
+          type: string
+          description: Department IDs, primary department first.
+        Description:
+          type: string
+        EvaluationUrls:
+          type: array
+          items:
+            type: object
+            properties:
+              URL:
+                type: string
+              ValidFrom:
+                type: string
+              ValidTo:
+                type: string
+        Fees:
+          type: array
+          items:
+            type: object
+            properties:
+              Amount:
+                type: string
+              FeeType:
+                type: string
+        Meetings:
+          type: array
+          items:
+            type: object
+            properties:
+              Building:
+                type: string
+              Dates:
+                type: string
+              DOW:
+                type: string
+              Location:
+                type: string
+              Room:
+                type: string
+              Times:
+                type: string
+        PosTags:
+          type: array
+          items:
+            type: object
+            properties:
+              Tag:
+                type: string
+        Prerequisites:
+          type: array
+          items:
+            type: object
+            properties:
+              Description:
+                type: string
+              Expression:
+                type: string
+              IsNegative:
+                type: string
+        WebNotes:
+          type: string
+        Instructors:
+          type: array
+          items:
+            type: object
+            properties:
+              HopkinsID:
+                type: string
+        Equivalencies:
+          type: array
+          items:
+            type: object
+            properties:
+              CourseName:
+                type: string
+              ValidFrom:
+                type: string
+              ValidTo:
+                type: string

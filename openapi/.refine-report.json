@@ -1,0 +1,16 @@
+{
+  "provider": "johns-hopkins-university",
+  "sources": [
+    "johns-hopkins-university-classes-api-openapi.yml",
+    "johns-hopkins-university-codes-api-openapi.yml"
+  ],
+  "outputs": [
+    "johns-hopkins-university-classes-api-openapi.yml",
+    "johns-hopkins-university-codes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
