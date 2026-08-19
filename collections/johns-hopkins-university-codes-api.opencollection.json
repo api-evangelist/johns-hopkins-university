@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Self-Service Public Course Search API (SIS) Classes Codes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available schools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/codes/schools",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              }
+            ]
+          },
+          "docs": "List all available schools"
+        },
+        {
+          "info": {
+            "name": "List available academic terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/codes/terms",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              }
+            ]
+          },
+          "docs": "Returns available academic terms. The range returned is from Spring 2009 to one year in the future from the current term."
+        },
+        {
+          "info": {
+            "name": "List departments for a school",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/codes/departments/:school",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              },
+              {
+                "name": "school",
+                "value": "",
+                "type": "path",
+                "description": "Exact school name."
+              }
+            ]
+          },
+          "docs": "Returns the list of all departments for the specified school. School names must be typed exactly as returned by /classes/codes/schools, with spaces encoded as %20. Department names containing a forward slash must encode it as an underscore (_)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

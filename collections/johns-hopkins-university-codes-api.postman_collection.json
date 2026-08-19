@@ -1,0 +1,481 @@
+{
+  "item": [
+    {
+      "id": "72ed2850-125d-430e-89f8-50d741f4234b",
+      "name": "Codes",
+      "description": {
+        "content": "Reference code lists (schools, terms, departments).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b046ac4-4334-4852-bac3-adf8453c6587",
+          "name": "List all available schools",
+          "request": {
+            "name": "List all available schools",
+            "description": {},
+            "url": {
+              "path": [
+                "classes",
+                "codes",
+                "schools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c40e708d-de22-46a0-a7c5-9c31978f7fc0",
+              "name": "List of available school names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "schools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  },\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aea9c0e5-0ea7-40a2-91da-a3c34058eb6f",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "schools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d60f40d0-9ef7-465c-8803-7e5fd81a4731",
+          "name": "List available academic terms",
+          "request": {
+            "name": "List available academic terms",
+            "description": {
+              "content": "Returns available academic terms. The range returned is from Spring 2009 to one year in the future from the current term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes",
+                "codes",
+                "terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "559cb985-10cf-44fe-a2f8-171ea5b4b82b",
+              "name": "List of available academic terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  },\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bf657c9-6ad5-4adc-9774-16e98b1c2d0d",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d6e611e-9658-417b-a7f9-deeeae68a1c7",
+          "name": "List departments for a school",
+          "request": {
+            "name": "List departments for a school",
+            "description": {
+              "content": "Returns the list of all departments for the specified school. School names must be typed exactly as returned by /classes/codes/schools, with spaces encoded as %20. Department names containing a forward slash must encode it as an underscore (_).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes",
+                "codes",
+                "departments",
+                ":school"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "school",
+                  "description": "(Required) Exact school name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f53d9d0-95e8-4f00-8e3c-0740ac5c51ed",
+              "name": "List of departments for the school.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "departments",
+                    ":school"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "school",
+                      "description": "(Required) Exact school name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  },\n  {\n    \"Name\": \"string\",\n    \"Value\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66b77c51-d8b3-48ce-9023-feb54ae1dbca",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    "codes",
+                    "departments",
+                    ":school"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "school",
+                      "description": "(Required) Exact school name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sis.jhu.edu/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c57e42b4-6aa5-456c-8536-130ebb9a0888",
+    "name": "Self-Service Public Course Search API (SIS) Classes Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns, in JSON format, a list of courses available through the Johns Hopkins University Public Course Search (https://sis.jhu.edu/classes). Results can be filtered by school, department, course number, section number, and academic term, or via a custom advanced-search query string. All requests require an API key supplied as the `key` query parameter. Endpoints, parameters and the response data dictionary are derived from the official SIS Web API Help page at https://sis.jhu.edu/api/help.\n\nContact Support:\n Name: SIS Development Team, Johns Hopkins University",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,938 @@
+{
+  "item": [
+    {
+      "id": "522d4198-8397-41b9-8174-a9e4e13a0176",
+      "name": "Classes",
+      "description": {
+        "content": "Course and section lookup and advanced search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8645394e-4da8-4b32-bff4-00f79ff11da2",
+          "name": "Get offered occurrences of a course number",
+          "request": {
+            "name": "Get offered occurrences of a course number",
+            "description": {
+              "content": "Returns all offered occurrences of a course number across available academic terms. At least the first 3 characters of the course number must be supplied; partial values return all matching courses. Supplying a full course number plus section number returns section detail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes",
+                ":courseNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "courseNumber",
+                  "description": "(Required) Course number or partial course number (minimum 3 characters). May include section number (e.g. AS.xxx.yyy.zz) to retrieve section detail."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b9ac993-1d71-4d9c-9d91-f84fabeb2ead",
+              "name": "Matching course records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":courseNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseNumber",
+                      "description": "(Required) Course number or partial course number (minimum 3 characters). May include section number (e.g. AS.xxx.yyy.zz) to retrieve section detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  },\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6c64bb9-e15f-470e-b555-6679802ff840",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":courseNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseNumber",
+                      "description": "(Required) Course number or partial course number (minimum 3 characters). May include section number (e.g. AS.xxx.yyy.zz) to retrieve section detail."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b5e2ffa-055b-4a50-8e4c-ab4e3b13b253",
+          "name": "Get occurrences of a course number in a term",
+          "request": {
+            "name": "Get occurrences of a course number in a term",
+            "description": {
+              "content": "Returns all offered occurrences of a course number in the specified academic term. The literal value `current` may be used as the term to return the current academic term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes",
+                ":courseNumber",
+                ":term"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "courseNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "term",
+                  "description": "(Required) Academic term name (e.g. \"Fall 2013\") or \"current\"."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e593d7b7-4edc-4447-ae95-564e2c43ef8e",
+              "name": "Matching course records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":courseNumber",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Academic term name (e.g. \"Fall 2013\") or \"current\"."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  },\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4eb924b-6052-4cb9-b5f9-4bdc6563fe8d",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":courseNumber",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Academic term name (e.g. \"Fall 2013\") or \"current\"."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a13787d-679a-4418-a103-cb07435b9a42",
+          "name": "Get classes for a school, department, and term",
+          "request": {
+            "name": "Get classes for a school, department, and term",
+            "description": {
+              "content": "Returns all classes for the specified school and department in the specified term. The literal value `current` may be used as the term.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes",
+                ":school",
+                ":department",
+                ":term"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "school",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "department",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "term",
+                  "description": "(Required) Academic term name or \"current\"."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c64575cf-da41-47dd-b97a-d748f5d55cdd",
+              "name": "Matching course records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":school",
+                    ":department",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "school",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "department",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Academic term name or \"current\"."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  },\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27f334bc-d19b-4c75-9777-730b7cc9bd5e",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes",
+                    ":school",
+                    ":department",
+                    ":term"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "school",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "department",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "term",
+                      "description": "(Required) Academic term name or \"current\"."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4abf7c7-d4c3-48f6-8aa7-5871751b51ad",
+          "name": "Advanced course search",
+          "request": {
+            "name": "Advanced course search",
+            "description": {
+              "content": "Performs an advanced search using query-string criteria. Multi-select criteria (School, Location, Term, Department) may be supplied more than once. Values must be URL encoded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued after registration at https://sis.jhu.edu/api/help."
+                },
+                {
+                  "disabled": false,
+                  "key": "Area",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Building",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "CourseNumber",
+                  "value": "<string>",
+                  "description": "Course number or first 3+ characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "CourseTitle",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Credits",
+                  "value": "<string>",
+                  "description": "Number of credits with two decimals (e.g. 3.00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DaysOfWeek",
+                  "value": "<string>",
+                  "description": "\"All|N\" or \"Any|N\" where N is the sum of day ranks (Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Department",
+                  "value": "<string>",
+                  "description": "Department name (multi-select; encode \"/\" as \"_\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "Instructor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Level",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "<string>",
+                  "description": "Campus location (multi-select)."
+                },
+                {
+                  "disabled": false,
+                  "key": "School",
+                  "value": "<string>",
+                  "description": "School name (multi-select)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartTimeEndTime",
+                  "value": "<string>",
+                  "description": "Start and end time separated by pipe (e.g. 09:00|10:15)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Term",
+                  "value": "<string>",
+                  "description": "Academic term name (multi-select)."
+                },
+                {
+                  "disabled": false,
+                  "key": "TimeOfDay",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "WritingIntensive",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "649e1dd8-6b7b-4ab3-9cfe-612d975b798f",
+              "name": "Matching course records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Area",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Building",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CourseNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CourseTitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Credits",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DaysOfWeek",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Instructor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "School",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "StartTimeEndTime",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "TimeOfDay",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "WritingIntensive",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  },\n  {\n    \"AllDepartments\": \"string\",\n    \"Areas\": \"string\",\n    \"Building\": \"string\",\n    \"CoursePrefix\": \"string\",\n    \"Credits\": \"string\",\n    \"Department\": \"string\",\n    \"DOW\": \"string\",\n    \"DOWSort\": \"string\",\n    \"HasBio\": \"string\",\n    \"InstructionMethod\": \"string\",\n    \"Instructors\": \"string\",\n    \"InstructorsFullName\": \"string\",\n    \"IsWritingIntensive\": \"string\",\n    \"Level\": \"string\",\n    \"Location\": \"string\",\n    \"MaxSeats\": \"string\",\n    \"Meetings\": \"string\",\n    \"OfferingName\": \"string\",\n    \"OpenSeats\": \"string\",\n    \"Repeatable\": \"string\",\n    \"SchoolName\": \"string\",\n    \"SeatsAvailable\": \"string\",\n    \"SectionCoReqNotes\": \"string\",\n    \"SectionCoRequisites\": \"string\",\n    \"SectionName\": \"string\",\n    \"SectionRegRestrictions\": \"string\",\n    \"Status\": \"string\",\n    \"SectionDetails\": {\n      \"CoRequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"TermName\": \"string\"\n        }\n      ],\n      \"Credits\": \"string\",\n      \"CreditType\": \"string\",\n      \"Departments\": \"string\",\n      \"DepartmentID\": \"string\",\n      \"Description\": \"string\",\n      \"EvaluationUrls\": [\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"URL\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ],\n      \"Fees\": [\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        },\n        {\n          \"Amount\": \"string\",\n          \"FeeType\": \"string\"\n        }\n      ],\n      \"Meetings\": [\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        },\n        {\n          \"Building\": \"string\",\n          \"Dates\": \"string\",\n          \"DOW\": \"string\",\n          \"Location\": \"string\",\n          \"Room\": \"string\",\n          \"Times\": \"string\"\n        }\n      ],\n      \"PosTags\": [\n        {\n          \"Tag\": \"string\"\n        },\n        {\n          \"Tag\": \"string\"\n        }\n      ],\n      \"Prerequisites\": [\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        },\n        {\n          \"Description\": \"string\",\n          \"Expression\": \"string\",\n          \"IsNegative\": \"string\"\n        }\n      ],\n      \"WebNotes\": \"string\",\n      \"Instructors\": [\n        {\n          \"HopkinsID\": \"string\"\n        },\n        {\n          \"HopkinsID\": \"string\"\n        }\n      ],\n      \"Equivalencies\": [\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        },\n        {\n          \"CourseName\": \"string\",\n          \"ValidFrom\": \"string\",\n          \"ValidTo\": \"string\"\n        }\n      ]\n    },\n    \"SubDepartment\": \"string\",\n    \"Term\": \"string\",\n    \"Term_IDR\": \"string\",\n    \"Term_JSS\": \"string\",\n    \"TermStartDate\": \"string\",\n    \"TimeOfDay\": \"string\",\n    \"Title\": \"string\",\n    \"Waitlisted\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b4dba38-ea03-4b5d-ba34-619692fda5d6",
+              "name": "API key missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Area",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Building",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CourseNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CourseTitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Credits",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DaysOfWeek",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Instructor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Level",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "School",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "StartTimeEndTime",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "TimeOfDay",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "WritingIntensive",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unable to authenticate: API Key parameter is missing in URL",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sis.jhu.edu/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "24a496f6-7b75-4539-b3a4-c8cee57659eb",
+    "name": "Self-Service Public Course Search API (SIS) Classes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns, in JSON format, a list of courses available through the Johns Hopkins University Public Course Search (https://sis.jhu.edu/classes). Results can be filtered by school, department, course number, section number, and academic term, or via a custom advanced-search query string. All requests require an API key supplied as the `key` query parameter. Endpoints, parameters and the response data dictionary are derived from the official SIS Web API Help page at https://sis.jhu.edu/api/help.\n\nContact Support:\n Name: SIS Development Team, Johns Hopkins University",
+      "type": "text/plain"
+    }
+  }
+}

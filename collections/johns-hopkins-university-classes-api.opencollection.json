@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Self-Service Public Course Search API (SIS) Classes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get offered occurrences of a course number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/:courseNumber",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              },
+              {
+                "name": "courseNumber",
+                "value": "",
+                "type": "path",
+                "description": "Course number or partial course number (minimum 3 characters). May include section number (e.g. AS.xxx.yyy.zz) to retrieve section detail."
+              }
+            ]
+          },
+          "docs": "Returns all offered occurrences of a course number across available academic terms. At least the first 3 characters of the course number must be supplied; partial values return all matching courses. Supplying a full course number plus section number returns section detail."
+        },
+        {
+          "info": {
+            "name": "Get occurrences of a course number in a term",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/:courseNumber/:term",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              },
+              {
+                "name": "courseNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "term",
+                "value": "",
+                "type": "path",
+                "description": "Academic term name (e.g. \"Fall 2013\") or \"current\"."
+              }
+            ]
+          },
+          "docs": "Returns all offered occurrences of a course number in the specified academic term. The literal value `current` may be used as the term to return the current academic term."
+        },
+        {
+          "info": {
+            "name": "Get classes for a school, department, and term",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes/:school/:department/:term",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              },
+              {
+                "name": "school",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "term",
+                "value": "",
+                "type": "path",
+                "description": "Academic term name or \"current\"."
+              }
+            ]
+          },
+          "docs": "Returns all classes for the specified school and department in the specified term. The literal value `current` may be used as the term."
+        },
+        {
+          "info": {
+            "name": "Advanced course search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sis.jhu.edu/api/classes",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued after registration at https://sis.jhu.edu/api/help."
+              },
+              {
+                "name": "Area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Building",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "CourseNumber",
+                "value": "",
+                "type": "query",
+                "description": "Course number or first 3+ characters."
+              },
+              {
+                "name": "CourseTitle",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Credits",
+                "value": "",
+                "type": "query",
+                "description": "Number of credits with two decimals (e.g. 3.00)."
+              },
+              {
+                "name": "DaysOfWeek",
+                "value": "",
+                "type": "query",
+                "description": "\"All|N\" or \"Any|N\" where N is the sum of day ranks (Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64)."
+              },
+              {
+                "name": "Department",
+                "value": "",
+                "type": "query",
+                "description": "Department name (multi-select; encode \"/\" as \"_\")."
+              },
+              {
+                "name": "Instructor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Level",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Location",
+                "value": "",
+                "type": "query",
+                "description": "Campus location (multi-select)."
+              },
+              {
+                "name": "School",
+                "value": "",
+                "type": "query",
+                "description": "School name (multi-select)."
+              },
+              {
+                "name": "StartTimeEndTime",
+                "value": "",
+                "type": "query",
+                "description": "Start and end time separated by pipe (e.g. 09:00|10:15)."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Term",
+                "value": "",
+                "type": "query",
+                "description": "Academic term name (multi-select)."
+              },
+              {
+                "name": "TimeOfDay",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "WritingIntensive",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Performs an advanced search using query-string criteria. Multi-select criteria (School, Location, Term, Department) may be supplied more than once. Values must be URL encoded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
