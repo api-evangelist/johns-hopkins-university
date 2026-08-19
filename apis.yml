@@ -1,82 +1,170 @@
 ---
 aid: johns-hopkins-university
 name: Johns Hopkins University
+x-type: university
+x-category: Private Research University
 description: >-
-  Johns Hopkins University is a private research university in Baltimore, Maryland,
-  ranked #22 in the QS World University Rankings 2025. It maintains a real public
-  developer footprint: the Hub API serves news, announcements, events, photo
-  galleries, and faculty experts from the university Hub database, and the
-  Self-Service Public Course Search API (SIS) returns course catalog data in JSON.
-  A central MuleSoft-based API Portal (api.jh.edu) governs integration APIs but is
-  gated to JHU affiliates. The university also operates numerous public GitHub
-  organizations across its libraries, data services, and research centers.
+  Johns Hopkins University is a private research university in Baltimore, Maryland, founded in 1876 and
+  ranked #21 in the QS World University Rankings 2026. Its programmable footprint is small but real and,
+  unusually for this cohort, it is genuinely its own: Johns Hopkins operates three APIs on hosts under its
+  own registrable domains and publishes two live machine-readable identity artifacts. The Hub API
+  (api.hub.jhu.edu) serves news, announcements, events, photo galleries and faculty experts from the Hub
+  database across fifteen resource families, and the Self-Service Public Course Search API
+  (sis.jhu.edu/api) returns course catalog data as JSON; both are documented in public but issue keys only
+  to Johns Hopkins affiliates. A MuleSoft Anypoint portal at api.jh.edu fronts integration APIs and is
+  gated entirely. Beyond those, the institution runs a Shibboleth SAML 2.0 identity provider whose
+  metadata it publishes itself at login.jh.edu and which is registered in the InCommon Federation with
+  Research and Scholarship and SIRTFI attributes; Project MUSE, operated by Johns Hopkins University
+  Press, answers OAI-PMH 2.0 over 897,938 harvestable records with no authentication at all — the only
+  fully open machine-readable surface the university has. The Johns Hopkins Research Data Repository
+  (archive.data.jhu.edu) is Dataverse software administered by JHU Data Services, and the university's
+  research portal at pure.johnshopkins.edu is an Elsevier Pure tenancy: both hold Johns Hopkins data, and
+  neither contract is Johns Hopkins engineering. No central public developer portal, no changelog, no
+  deprecation policy and no working status page exist for any of it.
 type: Index
 accessModel:
   pricing: free
-  onboarding: self-serve
+  onboarding: request
   trial: false
-  try_now: true
+  try_now: false
   public: false
-  label: Free · Self-serve signup
+  label: Free · Affiliate-gated, key issued on request
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
-  method: derived
+  - probes
+  generated: '2026-08-19'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/johns-hopkins-university.png
 url: https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
-  - Research
-  - Course Catalog
-  - News
+  - Higher Education
+  - Education
   - United States
+  - Private Research University
+  - Association of American Universities
+  - Research
+  - Research Data
+  - Course Catalog
+  - Identity Federation
+  - OAI-PMH
+  - Research Repository
+  - News
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 specificationVersion: '0.23'
+x-ror: https://ror.org/00za53h95
+x-domains:
+  - jhu.edu
+  - jh.edu
+  - johnshopkins.edu
+x-coverage:
+  state: covered
+  reason: institution_operated_surfaces_verified
+  detail: >-
+    Johns Hopkins publishes three institution-operated APIs, two institution-operated SAML identity
+    artifacts and one fully open OAI-PMH repository, all verified live by direct probe on 2026-08-19. The
+    profile is genuinely thin rather than under-researched: the two documented APIs gate key issuance to
+    Johns Hopkins affiliates, the MuleSoft portal is gated entirely, and no central public developer
+    portal exists. PARTIAL BLOCKING is the one caveat and it is about US, not about them: Cloudflare bot
+    management returns 403 to automated clients across the university's WordPress estate
+    (www.jhu.edu, ai.jhu.edu, it.johnshopkins.edu, teaching.jhu.edu, press.jhu.edu) and across
+    jscholarship.library.jhu.edu and archive.data.jhu.edu, so the OAI-PMH endpoint that re3data records
+    for the Johns Hopkins Research Data Repository could not be exercised from here. Those hosts grade
+    LIVE, not dead. A negative probe was run before crediting any vendor tenancy: zzznotarealtenant.
+    figshare.com resolves and answers 202 exactly as jhu.figshare.com does, so the Figshare DNS record is
+    a wildcard and is NOT evidence of a Johns Hopkins Figshare tenancy — none is claimed.
+  evidence:
+    - url: https://api.hub.jhu.edu/docs/getting-started/introduction/
+      status: 200
+    - url: https://api.hub.jhu.edu/openapi.json
+      status: 401
+    - url: https://sis.jhu.edu/api/help
+      status: 200
+    - url: https://sis.jhu.edu/api/classes
+      status: 500
+    - url: https://api.jh.edu/
+      status: 200
+    - url: https://login.jh.edu/idp/shibboleth
+      status: 200
+    - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Ajohnshopkins.edu
+      status: 200
+    - url: https://muse.jhu.edu/oai?verb=Identify
+      status: 200
+    - url: https://muse.jhu.edu/oai?verb=ListMetadataFormats
+      status: 200
+    - url: https://api.datacite.org/providers/jhu
+      status: 200
+    - url: https://www.re3data.org/api/v1/repository/r3d100011836
+      status: 200
+    - url: https://pure.johnshopkins.edu/
+      status: 200
+    - url: https://pure.johnshopkins.edu/ws/oai?verb=Identify
+      status: 401
+    - url: https://archive.data.jhu.edu/oai?verb=Identify
+      status: 403
+    - url: https://jscholarship.library.jhu.edu/oai/request?verb=Identify
+      status: 403
+    - url: https://www.jhu.edu/
+      status: 403
+    - url: https://status.jh.edu/
+      status: 500
+    - url: https://data.jhu.edu/
+      status: 0
 apis:
 - aid: johns-hopkins-university:hub
   name: JHU Hub API
   description: >-
-    REST API exposing data from the Hub database, a central repository of news articles, announcements,
-    photo galleries, faculty experts, and events. Built to power the Hub website and reused across JHU
-    schools, divisions, and centers. Access requires requesting a key as a JHU affiliate.
+    REST API over the Hub database, the central repository of news articles, announcements, photo
+    galleries, faculty experts and events at Johns Hopkins. Built to power hub.jhu.edu and reused across
+    JHU schools, divisions and centers. Fifteen resource families, each exposing a collection, a single
+    object and a subcollection endpoint, in HAL-formatted JSON. Requires an API key on the `key` query
+    parameter and a version on the `v` parameter; keys are issued by email to Johns Hopkins affiliates.
   humanURL: https://api.hub.jhu.edu/docs/
   baseURL: https://api.hub.jhu.edu
+  x-operator: institution
+  x-operator-basis: >-
+    api.hub.jhu.edu is under the institution's own registrable domain jhu.edu; the documentation is
+    copyrighted to Johns Hopkins University and describes the university's own Hub content database.
   tags:
   - News
   - Events
   - Faculty Experts
   - Content
+  - HAL
   properties:
+  - type: OpenAPI
+    url: openapi/johns-hopkins-university-hub-api-openapi.yml
   - type: Documentation
     url: https://api.hub.jhu.edu/docs/
-- aid: johns-hopkins-university:api-portal
-  name: JHU API Portal (MuleSoft Anypoint)
-  description: >-
-    Central API management platform built on MuleSoft Anypoint, where JHU developers and consumers view
-    and request access to integration APIs. Gated to Johns Hopkins affiliates rather than open to the
-    public.
-  humanURL: https://api.jh.edu/
-  tags:
-  - Integration
-  - Gated
-  - MuleSoft
-  properties:
   - type: Documentation
-    url: https://api.jh.edu/
+    url: https://api.hub.jhu.edu/docs/getting-started/connecting/
+  - type: x-example
+    url: examples/johns-hopkins-university-hub-article-example.json
+  - type: x-errors
+    url: errors/johns-hopkins-university-errors.yml
+  - type: x-lifecycle
+    url: lifecycle/johns-hopkins-university-lifecycle.yml
 - aid: johns-hopkins-university:johns-hopkins-university-classes-api
-  name: Johns Hopkins University Classes API
-  description: Course and section lookup and advanced search.
-  humanURL: https://api.hub.jhu.edu/docs/
-  baseURL: https://api.hub.jhu.edu
+  name: Johns Hopkins University SIS Classes API
+  description: >-
+    Course and section lookup and advanced search against the Self-Service Public Course Search API,
+    which returns the Johns Hopkins course catalog as JSON. Filterable by school, department, course
+    number, section number and academic term, or by a custom advanced-search query string. Requires an
+    API key on the `key` query parameter.
+  humanURL: https://sis.jhu.edu/api/help
+  baseURL: https://sis.jhu.edu/api
+  x-operator: institution
+  x-operator-basis: >-
+    sis.jhu.edu is under the institution's own registrable domain jhu.edu; the OpenAPI servers[] entry is
+    https://sis.jhu.edu/api and info.contact names the SIS Development Team, Johns Hopkins University.
   tags:
   - Classes
+  - Course Catalog
   properties:
   - type: OpenAPI
     url: openapi/johns-hopkins-university-classes-api-openapi.yml
@@ -98,13 +186,25 @@ apis:
     url: vocabulary/johns-hopkins-university-vocabulary.yml
   - type: x-json-ld
     url: json-ld/johns-hopkins-university-context.jsonld
+  - type: x-errors
+    url: errors/johns-hopkins-university-errors.yml
+  - type: x-lifecycle
+    url: lifecycle/johns-hopkins-university-lifecycle.yml
 - aid: johns-hopkins-university:johns-hopkins-university-codes-api
-  name: Johns Hopkins University Codes API
-  description: Reference code lists (schools, terms, departments).
-  humanURL: https://api.hub.jhu.edu/docs/
-  baseURL: https://api.hub.jhu.edu
+  name: Johns Hopkins University SIS Codes API
+  description: >-
+    Reference code lists — schools, terms and departments — from the Self-Service Public Course Search
+    API. The lookup vocabulary that makes the Classes API's filters usable. Requires an API key on the
+    `key` query parameter.
+  humanURL: https://sis.jhu.edu/api/help
+  baseURL: https://sis.jhu.edu/api
+  x-operator: institution
+  x-operator-basis: >-
+    sis.jhu.edu is under the institution's own registrable domain jhu.edu; the OpenAPI servers[] entry is
+    https://sis.jhu.edu/api and info.contact names the SIS Development Team, Johns Hopkins University.
   tags:
   - Codes
+  - Course Catalog
   properties:
   - type: OpenAPI
     url: openapi/johns-hopkins-university-codes-api-openapi.yml
@@ -117,8 +217,6 @@ apis:
   - type: JSONStructure
     url: json-structure/johns-hopkins-university-course-structure.json
   - type: x-example
-    url: examples/johns-hopkins-university-advanced-search-example.json
-  - type: x-example
     url: examples/johns-hopkins-university-schools-example.json
   - type: x-rules
     url: rules/johns-hopkins-university-rules.yml
@@ -126,21 +224,194 @@ apis:
     url: vocabulary/johns-hopkins-university-vocabulary.yml
   - type: x-json-ld
     url: json-ld/johns-hopkins-university-context.jsonld
+  - type: x-errors
+    url: errors/johns-hopkins-university-errors.yml
+- aid: johns-hopkins-university:api-portal
+  name: JHU API Portal (MuleSoft Anypoint)
+  description: >-
+    Central API management platform built on MuleSoft Anypoint, where Johns Hopkins developers and
+    consumers view and request access to enterprise integration APIs. The portal answers 200 but its
+    asset catalog is gated to Johns Hopkins affiliates, so no contract, version or lifecycle policy is
+    visible to the public. Recorded as a real surface with nothing behind it that we can read.
+  humanURL: https://api.jh.edu/
+  baseURL: https://api.jh.edu
+  x-operator: institution
+  x-operator-basis: >-
+    api.jh.edu is under the institution's own registrable domain jh.edu. MuleSoft supplies the platform
+    software; the tenancy and the APIs behind it are the institution's, and no MuleSoft-authored contract
+    is saved here.
+  tags:
+  - Integration
+  - Gated
+  - MuleSoft
+  properties:
+  - type: Documentation
+    url: https://api.jh.edu/
+  - type: x-lifecycle
+    url: lifecycle/johns-hopkins-university-lifecycle.yml
+- aid: johns-hopkins-university:identity-federation
+  name: Johns Hopkins Shibboleth Identity Provider
+  description: >-
+    Johns Hopkins operates its own Shibboleth SAML 2.0 identity provider and publishes the entity
+    metadata itself at login.jh.edu, scoped to johnshopkins.edu and jh.edu. The same identity is
+    registered in the InCommon Federation as urn:mace:incommon:johnshopkins.edu, carrying the InCommon
+    and REFEDS Research and Scholarship entity categories and SIRTFI assurance certification. Live,
+    signed, machine-readable and institution-operated by definition — the single most under-catalogued
+    surface class in higher education.
+  humanURL: https://login.jh.edu/idp/shibboleth
+  baseURL: https://login.jh.edu/idp
+  x-operator: institution
+  x-operator-basis: >-
+    Metadata served from login.jh.edu under the institution's own registrable domain jh.edu; the
+    Organization element names Johns Hopkins University and the support contact is the JHU Enterprise
+    Authentication Team at enterpriseauth@jh.edu.
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - InCommon
+  properties:
+  - type: IdentityFederation
+    url: identity-federation/johns-hopkins-university-identity-federation.yml
+  - type: x-saml-metadata
+    url: identity-federation/johns-hopkins-university-idp-saml-metadata.xml
+  - type: x-saml-metadata
+    url: identity-federation/johns-hopkins-university-incommon-entity-metadata.xml
+  - type: x-conformance
+    url: conformance/johns-hopkins-university-education-standards-conformance.yml
+- aid: johns-hopkins-university:project-muse-oai
+  name: Project MUSE OAI-PMH Repository
+  description: >-
+    Project MUSE, operated by Johns Hopkins University Press, exposes an OAI-PMH 2.0 harvesting endpoint
+    that answers Identify, ListMetadataFormats, ListSets and ListRecords with no authentication at all —
+    897,938 records across 971 sets in oai_dc, earliest datestamp 2016-08-31. It is the only fully open
+    machine-readable surface Johns Hopkins operates, and the strongest single piece of education-regime
+    domain standard evidence in this profile.
+  humanURL: https://about.muse.jhu.edu/
+  baseURL: https://muse.jhu.edu/oai
+  x-operator: institution
+  x-operator-basis: >-
+    muse.jhu.edu is under the institution's own registrable domain jhu.edu; the Identify response names
+    the repository Project MUSE with adminEmail musetech@jh.edu. Project MUSE is a division of Johns
+    Hopkins University Press.
+  tags:
+  - OAI-PMH
+  - Scholarly Publishing
+  - Metadata Harvesting
+  - Open Access
+  properties:
+  - type: Documentation
+    url: https://muse.jhu.edu/oai?verb=Identify
+  - type: x-conformance
+    url: conformance/johns-hopkins-university-education-standards-conformance.yml
+  - type: x-example
+    url: conformance/johns-hopkins-university-project-muse-oai-identify.xml
+  - type: x-example
+    url: conformance/johns-hopkins-university-project-muse-oai-metadataformats.xml
+- aid: johns-hopkins-university:research-data-repository
+  name: Johns Hopkins Research Data Repository
+  description: >-
+    Institutional research data repository at archive.data.jhu.edu, administered by Johns Hopkins
+    University Data Services within the Sheridan Libraries, running Dataverse software and minting DOIs
+    through the institution's own DataCite account (repository symbol JHU.DS under provider JHU).
+    re3data records an OAI-PMH endpoint at /oai. NO CONTRACT IS SAVED HERE: the REST and OAI-PMH
+    interfaces are the Dataverse Project's, not Johns Hopkins engineering, and saving them under this
+    slug is precisely the misattribution this pipeline exists to prevent. The repository, the data and
+    the DOIs are the institution's; the API contract is not.
+  humanURL: https://archive.data.jhu.edu/
+  baseURL: https://archive.data.jhu.edu
+  x-operator: institution
+  x-operator-basis: >-
+    archive.data.jhu.edu is under the institution's own registrable domain jhu.edu and is administered by
+    JHU Data Services. Dataverse supplies the software; the contract belongs to the Dataverse Project and
+    is deliberately not saved under this institution.
+  x-software: Dataverse
+  x-contract-owner: The Dataverse Project
+  tags:
+  - Research Data
+  - Research Repository
+  - Dataverse
+  - OAI-PMH
+  - DataCite
+  properties:
+  - type: ResearchRepository
+    url: https://archive.data.jhu.edu/
+  - type: Documentation
+    url: https://dataservices.library.jhu.edu/
+  - type: x-registry
+    url: https://www.re3data.org/repository/r3d100011836
+  - type: x-conformance
+    url: conformance/johns-hopkins-university-education-standards-conformance.yml
+- aid: johns-hopkins-university:pure-research-portal
+  name: Johns Hopkins Research Portal (Elsevier Pure tenancy)
+  description: >-
+    The Johns Hopkins research information portal at pure.johnshopkins.edu, which CNAMEs to
+    jhu.elsevierpure.com. This is an Elsevier Pure tenancy: the researcher profiles, publications and
+    organizational data are Johns Hopkins', the platform and every API contract on it are Elsevier's.
+    Recorded as a TENANT relationship, which is a real institutional fact worth keeping. Pure's own web
+    services (/ws/rest, /ws/api, /ws/oai) all answer 401 — deployed but closed to the public. No Elsevier
+    contract is saved under this institution.
+  humanURL: https://pure.johnshopkins.edu/
+  baseURL: https://pure.johnshopkins.edu
+  x-operator: tenant
+  x-operator-basis: >-
+    pure.johnshopkins.edu is a CNAME to jhu.elsevierpure.com — an institution-specific account on a
+    vendor platform. The data is Johns Hopkins'; the contract is Elsevier's and belongs against
+    Elsevier's own profile, not this one.
+  x-vendor: Elsevier Pure
+  tags:
+  - Research Information
+  - Research Repository
+  - Pure
+  - Tenant
+  properties:
+  - type: ResearchRepository
+    url: https://pure.johnshopkins.edu/
 common:
+  - type: Website
+    url: https://www.jhu.edu/
+  - type: DeveloperPortal
+    url: https://api.jh.edu/
+  - type: APIReference
+    url: https://api.hub.jhu.edu/docs/
+  - type: Documentation
+    url: https://sis.jhu.edu/api/help
+  - type: CourseCatalog
+    url: https://sis.jhu.edu/api/help
+  - type: IdentityFederation
+    url: identity-federation/johns-hopkins-university-identity-federation.yml
+  - type: ResearchRepository
+    url: https://archive.data.jhu.edu/
+  - type: ResearchComputing
+    url: https://www.arch.jhu.edu/
+  - type: OpenData
+    url: https://dataservices.library.jhu.edu/
+  - type: LibraryCatalog
+    url: https://guides.library.jhu.edu/open-access/repositories
+  - type: AIPolicy
+    url: https://teaching.jhu.edu/university-teaching-policies/generative-ai/guidelines/
+  - type: GitHubOrganization
+    url: https://github.com/johnshopkins
+  - type: GitHub
+    url: https://github.com/jhu-data-services
+  - type: GitHub
+    url: https://github.com/JHUAPL
+  - type: Blog
+    url: https://hub.jhu.edu/
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/johns-hopkins-university/
   - type: AgenticAccess
     url: agentic-access/johns-hopkins-university-agentic-access.yml
   - type: DomainSecurity
     url: security/johns-hopkins-university-domain-security.yml
   - type: Authentication
     url: authentication/johns-hopkins-university-authentication.yml
-  - type: Website
-    url: https://www.jhu.edu/
-  - type: DeveloperPortal
-    url: https://api.jh.edu/
-  - type: GitHub
-    url: https://github.com/jhu-sheridan-libraries
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/johns-hopkins-university/
+  - type: Conformance
+    url: conformance/johns-hopkins-university-education-standards-conformance.yml
+  - type: Errors
+    url: errors/johns-hopkins-university-errors.yml
+  - type: Lifecycle
+    url: lifecycle/johns-hopkins-university-lifecycle.yml
   - type: Plans
     url: plans/johns-hopkins-university-plans-pricing.yml
   - type: RateLimits
