@@ -132,6 +132,12 @@ apis:
     copyrighted to Johns Hopkins University and describes the university's own Hub content database.
   tags:
   - News
+  - Event
+  - Faculty Experts
+  - Content
+  - HAL
+  tags_raw:
+  - News
   - Events
   - Faculty Experts
   - Content
