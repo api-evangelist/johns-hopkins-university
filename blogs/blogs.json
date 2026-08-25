@@ -2,13 +2,20 @@
   "repo": "johns-hopkins-university",
   "feeds": [
     {
-      "source": "https://hub.jhu.edu/",
+      "source": "https://hub.jhu.edu/feed/",
       "feed_url": "https://hub.jhu.edu/feed/",
-      "title": "JHU Hub",
-      "saved": 5,
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/JHUAPL",
+      "feed_url": "https://github.com/JHUAPL",
+      "title": "",
+      "saved": 0,
       "method": "none"
     }
   ],
-  "post_count": 41,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 46,
+  "fetched": "2026-08-22T20:20:02Z"
 }
