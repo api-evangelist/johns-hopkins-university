@@ -1,0 +1,37 @@
+slug: johns-hopkins-university
+provider: Johns Hopkins University
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Classes
+  spec_file: johns-hopkins-university-classes-api-openapi.yml
+  capability_id: BC-4700.40
+  capability_id_l1: BC-4700
+  capability_name: Programme Catalogue Management
+  confidence: 0.85
+  evidence: Returns ... a list of courses available through the Johns Hopkins University Public Course
+    Search; GET /classes/{school}/{department}/{term} Get classes for a school, department, and term
+  reason: Read-only publication and search of the institutional course/section catalogue by term, school
+    and department — programme catalogue management. Section timetable detail is present (SectionDetail)
+    but the surface is catalogue publication rather than authoritative scheduling records.
+- tag: Content
+  spec_file: johns-hopkins-university-content-api-openapi.yml
+  capability_id: BC-850.20
+  capability_id_l1: BC-850
+  capability_name: External Communications Management
+  confidence: 0.7
+  evidence: the central repository of news articles, announcements, photo galleries, faculty experts and
+    events maintained by Johns Hopkins University ... built to power the Hub website
+  reason: News articles, announcements and events published to power the university's public Hub website
+    — institutional external communications content, not academic learning content. Sub-capability choice
+    between external comms and media relations is uncertain.

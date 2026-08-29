@@ -386,6 +386,9 @@ apis:
   - type: x-lifecycle
     url: lifecycle/johns-hopkins-university-lifecycle.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/johns-hopkins-university-capability-edges.yml
+    name: Johns Hopkins University Business Capability Map
   - type: Website
     url: https://www.jhu.edu/
   - type: DeveloperPortal
