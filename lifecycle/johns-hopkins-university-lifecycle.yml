@@ -1,0 +1,58 @@
+---
+name: Johns Hopkins University API Lifecycle
+aid: johns-hopkins-university
+generated: '2026-08-19'
+method: searched
+source: https://api.hub.jhu.edu/docs/getting-started/connecting/
+x-operator: institution
+description: >-
+  Versioning and change-management posture for the institution-operated Johns Hopkins APIs, read from
+  the operators' own documentation and from live probes. Recorded as found, including where nothing is
+  published. No deprecation policy, changelog, sunset header or status page was located for any of these
+  surfaces.
+apis:
+  - api: JHU Hub API
+    baseURL: https://api.hub.jhu.edu
+    versioning:
+      style: query-parameter
+      parameter: v
+      current: '1'
+      required: true
+      evidence: https://api.hub.jhu.edu/docs/getting-started/connecting/
+      detail: >-
+        "All requests to the API are required to provide a version number. The current API version is 1."
+    changelog: null
+    deprecation_policy: null
+    sunset_header: not_observed
+    status_page: null
+  - api: Self-Service Public Course Search API (SIS)
+    baseURL: https://sis.jhu.edu/api
+    versioning:
+      style: none
+      current: null
+      required: false
+      evidence: https://sis.jhu.edu/api/help
+      detail: >-
+        The SIS Web API Help page documents no version parameter, no version path segment and no version
+        header. The API is unversioned in public.
+    changelog: null
+    deprecation_policy: null
+    sunset_header: not_observed
+    status_page: null
+  - api: JHU API Portal (MuleSoft Anypoint)
+    baseURL: https://api.jh.edu
+    versioning:
+      style: unknown
+      detail: >-
+        The portal answers 200 but its asset catalog is gated to Johns Hopkins affiliates, so no version
+        or lifecycle policy is visible to the public.
+    changelog: null
+    deprecation_policy: null
+    status_page: null
+findings:
+  - >-
+    status.jh.edu resolves but returned HTTP 500 on 2026-08-19; no working public status page was found
+    for any Johns Hopkins API. It is deliberately NOT recorded as a Status pointer.
+  - >-
+    No public changelog, release notes feed or deprecation policy exists for any institution-operated
+    Johns Hopkins API surface.

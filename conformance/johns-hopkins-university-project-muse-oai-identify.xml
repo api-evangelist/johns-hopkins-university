@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+<responseDate>2026-08-19T21:31:44Z</responseDate>
+<request verb="Identify">http://muse.jhu.edu/oai</request>
+<Identify>
+    <repositoryName>Project MUSE</repositoryName>
+    <baseURL>http://muse.jhu.edu/oai</baseURL>
+    <protocolVersion>2.0</protocolVersion>
+    <adminEmail>musetech@jh.edu</adminEmail>
+    <earliestDatestamp>2016-08-31</earliestDatestamp>
+    <deletedRecord>transient</deletedRecord>
+    <granularity>YYYY-MM-DD</granularity>
+
+</Identify>
+</OAI-PMH>

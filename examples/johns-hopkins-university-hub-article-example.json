@@ -1,0 +1,74 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "https://api.hub.jhu.edu/docs/getting-started/responses/",
+    "x-operator": "institution",
+    "note": "HAL request/response examples reproduced from the operator's own published Hub API documentation. NOT a captured live response: Hub API key issuance is restricted to Johns Hopkins affiliates, so this payload was not executed. Truncated exactly as the operator truncates it in their documentation."
+  },
+  "object": {
+    "request": {
+      "method": "GET",
+      "url": "https://api.hub.jhu.edu/articles/8841?key=YOUR_API_KEY&v=1"
+    },
+    "response": {
+      "_embedded": {
+        "tags": [
+          {
+            "_links": { "self": { "href": "/tags/229" } },
+            "id": 229,
+            "type": "tag",
+            "name": "space exploration"
+          }
+        ]
+      },
+      "_links": {
+        "self": { "href": "/articles/8841" },
+        "related_content": [ { "href": "/articles/8790" } ]
+      },
+      "id": 8841,
+      "headline": "Pluto shows its heart ahead of New Horizons close-up",
+      "publish_date": 1436464500,
+      "type": "article"
+    }
+  },
+  "collection": {
+    "request": {
+      "method": "GET",
+      "url": "https://api.hub.jhu.edu/articles?page=2&key=YOUR_API_KEY&v=1"
+    },
+    "response": {
+      "_embedded": {
+        "articles": [
+          "...article object...",
+          "...article object...",
+          "...article object...",
+          "...article object...",
+          "...article object..."
+        ]
+      },
+      "_links": {
+        "find": { "href": "/articles/{?id}", "templated": true },
+        "next": { "href": "/articles?page=3" },
+        "prev": { "href": "/articles?page=1" },
+        "self": { "href": "/articles?page=2" }
+      },
+      "page": 1,
+      "per_page": 5,
+      "return_count": 5,
+      "total_available": 100
+    }
+  },
+  "error": {
+    "request": {
+      "method": "GET",
+      "url": "https://api.hub.jhu.edu/articles"
+    },
+    "response": {
+      "error": true,
+      "message": "API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs",
+      "statusCode": 401
+    },
+    "note": "This one IS a captured live response, probed unauthenticated on 2026-08-19."
+  }
+}

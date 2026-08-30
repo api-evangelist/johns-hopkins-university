@@ -1,0 +1,51 @@
+---
+name: Johns Hopkins University API Error Responses
+aid: johns-hopkins-university
+generated: '2026-08-19'
+method: probed
+source: https://api.hub.jhu.edu/docs/getting-started/responses/
+x-operator: institution
+description: >-
+  Error response shapes observed by unauthenticated probe against the two institution-operated Johns
+  Hopkins APIs that answer on the open web. Bodies below are verbatim from live responses on
+  2026-08-19; nothing is modelled or invented. Neither API publishes a documented error catalog, and
+  neither uses RFC 7807 problem+json.
+apis:
+  - api: JHU Hub API
+    baseURL: https://api.hub.jhu.edu
+    media_type: application/json
+    format: proprietary
+    envelope:
+      error: boolean
+      message: string
+      statusCode: integer
+    errors:
+      - status: 401
+        probe: https://api.hub.jhu.edu/openapi.json
+        body: >-
+          {"error":true,"message":"API requests require authentication. Please see the API documentation
+          for more information: https://api.hub.jhu.edu/docs","statusCode":401}
+        assessment: >-
+          Good practice: the 401 names the cause and links the documentation that resolves it. Machine
+          readable and stable.
+      - status: 404
+        probe: https://api.hub.jhu.edu/api/v1/content
+        body: '{"error":true,"message":"Not found.","statusCode":404}'
+        assessment: >-
+          Consistent envelope, but the message carries no resource identity and no remediation link.
+  - api: Self-Service Public Course Search API (SIS)
+    baseURL: https://sis.jhu.edu/api
+    media_type: text/plain
+    format: none
+    errors:
+      - status: 500
+        probe: https://sis.jhu.edu/api/classes
+        body: 'Unable to authenticate: API Key parameter is missing in URL https://sis.jhu.edu/api/classes'
+        assessment: >-
+          DEFECT. A missing API key is a client error and must return 401 or 403; SIS returns 500 with a
+          plain-text body and no machine-readable envelope. An agent cannot distinguish this from a server
+          outage without parsing prose. This is the single highest-value ergonomics fix on the JHU surface.
+observations:
+  - The two institution-operated APIs do not share an error contract with each other.
+  - No RFC 7807 application/problem+json on any Johns Hopkins surface probed.
+  - No documented error code catalog was published for either API.

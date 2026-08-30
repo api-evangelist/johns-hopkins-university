@@ -1,0 +1,128 @@
+---
+name: Johns Hopkins University — Education Regime Domain Standard Conformance
+aid: johns-hopkins-university
+generated: '2026-08-19'
+method: probed
+source: https://apievangelist.com/kin-score/
+regime: education
+rubric: kin-score-0.12.0 domain_standard_conformance
+description: >-
+  Conformance against the Kin Score `education` regulatory regime standards list. Reward-only: an entry
+  appears here only where a live probe returned evidence located at a named URL. Standards with no
+  evidence are recorded as not_found and are NOT counted. Nothing in this file is inferred from a prose
+  claim on a web page.
+standards:
+  - standard: shibboleth
+    status: conformant
+    x-operator: institution
+    evidence:
+      - url: https://login.jh.edu/idp/shibboleth
+        status: 200
+        content_type: application/xml
+        locator: /EntityDescriptor/IDPSSODescriptor/Extensions/shibmd:Scope
+        detail: >-
+          Shibboleth IdP metadata published by Johns Hopkins on its own host, carrying the Shibboleth
+          metadata extension namespace urn:mace:shibboleth:metadata:1.0 with scopes johnshopkins.edu and
+          jh.edu.
+      - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Ajohnshopkins.edu
+        status: 200
+        content_type: application/samlmetadata+xml
+        locator: /EntityDescriptor/IDPSSODescriptor/Extensions/shibmd:Scope
+        detail: InCommon-registered Shibboleth entity for johnshopkins.edu.
+    artifact: identity-federation/johns-hopkins-university-identity-federation.yml
+  - standard: saml
+    status: conformant
+    x-operator: institution
+    evidence:
+      - url: https://login.jh.edu/idp/shibboleth
+        status: 200
+        content_type: application/xml
+        locator: /EntityDescriptor[@entityID='https://login.jh.edu/idp/shibboleth']/IDPSSODescriptor/@protocolSupportEnumeration
+        detail: >-
+          SAML 2.0 IdP. protocolSupportEnumeration is urn:oasis:names:tc:SAML:2.0:protocol; HTTP-Redirect
+          and HTTP-POST SingleSignOnService bindings and an HTTP-Redirect SingleLogoutService are declared.
+      - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Ajohnshopkins.edu
+        status: 200
+        content_type: application/samlmetadata+xml
+        locator: /EntityDescriptor/Signature
+        detail: >-
+          Signed SAML 2.0 metadata (rsa-sha256), REFEDS/InCommon Research and Scholarship entity category,
+          SIRTFI assurance certification.
+    artifact: identity-federation/johns-hopkins-university-identity-federation.yml
+  - standard: oai-pmh
+    status: conformant
+    x-operator: institution
+    evidence:
+      - url: https://muse.jhu.edu/oai?verb=Identify
+        status: 200
+        content_type: text/xml
+        locator: /OAI-PMH/Identify/protocolVersion
+        detail: >-
+          Project MUSE, operated by Johns Hopkins University Press, answers OAI-PMH protocolVersion 2.0.
+          repositoryName "Project MUSE", baseURL http://muse.jhu.edu/oai, adminEmail musetech@jh.edu,
+          earliestDatestamp 2016-08-31, deletedRecord transient, granularity YYYY-MM-DD.
+      - url: https://muse.jhu.edu/oai?verb=ListMetadataFormats
+        status: 200
+        content_type: text/xml
+        locator: /OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+        detail: oai_dc supported against http://www.openarchives.org/OAI/2.0/oai_dc.xsd.
+      - url: https://muse.jhu.edu/oai?verb=ListRecords&metadataPrefix=oai_dc
+        status: 200
+        content_type: text/xml
+        locator: /OAI-PMH/ListRecords/record
+        detail: >-
+          897,938 records harvestable across 971 sets, no authentication required. First record identifier
+          oai:muse.jhu.edu:/article/2.
+    artifact: conformance/johns-hopkins-university-project-muse-oai-identify.xml
+  - standard: datacite
+    status: conformant
+    x-operator: institution
+    evidence:
+      - url: https://api.datacite.org/providers/jhu
+        status: 200
+        content_type: application/vnd.api+json
+        locator: data.attributes.symbol
+        detail: >-
+          DataCite direct member, symbol JHU, organizationType academicInstitution, country US, active
+          since 2019-01-08, ROR https://ror.org/00za53h95.
+      - url: https://api.datacite.org/repositories?provider-id=jhu
+        status: 200
+        content_type: application/vnd.api+json
+        locator: meta.total
+        detail: >-
+          Eight DataCite repositories registered under the Johns Hopkins University provider account,
+          including JHU.DS (Johns Hopkins University Data Services), JHU.BOSSDB (BossDB), JHU.SRE (APL
+          Planetary Exploration Group), JHU.NHATS, JHU.PARADIM, JHU.PMA202, JHU.HEMI-IGSN and JHU.CRAEDL.
+  - standard: scim
+    status: not_found
+    evidence: []
+  - standard: lti
+    status: not_found
+    evidence: []
+  - standard: oneroster
+    status: not_found
+    evidence: []
+  - standard: ed-fi
+    status: not_found
+    evidence: []
+  - standard: caliper
+    status: not_found
+    evidence: []
+  - standard: qti
+    status: not_found
+    evidence: []
+  - standard: orcid
+    status: not_found
+    evidence: []
+    note: >-
+      Johns Hopkins researchers hold ORCID iDs and the institution's Pure portal consumes them, but no
+      institution-operated ORCID integration surface or member-API contract was reachable on a JHU host.
+      Not counted.
+  - standard: crossref
+    status: not_found
+    evidence: []
+    note: >-
+      Crossref member records exist for Johns Hopkins sub-units (Bloomberg School of Public Health Center
+      for Communication Programs, member 4690, prefix 10.9745; Arthur Friedheim Library at the Peabody
+      Institute, member 49054, prefix 10.62570), but no central Johns Hopkins University Crossref
+      membership or institution-operated deposit surface was found. Not counted for the institution.

@@ -1,0 +1,78 @@
+---
+name: Johns Hopkins University Identity Federation
+aid: johns-hopkins-university
+generated: '2026-08-19'
+method: probed
+source: https://login.jh.edu/idp/shibboleth
+x-operator: institution
+description: >-
+  Johns Hopkins University operates its own Shibboleth SAML 2.0 identity provider and is a registered
+  member of the InCommon Federation. Both the institution's self-published IdP metadata and the
+  federation registry copy of its entity are live, machine-readable and served over the open web. This
+  is the surface class the university pipeline flags as most often uncatalogued: it is unambiguously
+  institution-operated, it is a real machine-readable contract, and it is not a vendor's document
+  running under the institution's name.
+entities:
+  - entity_id: https://login.jh.edu/idp/shibboleth
+    role: IdP
+    protocol: urn:oasis:names:tc:SAML:2.0:protocol
+    metadata_url: https://login.jh.edu/idp/shibboleth
+    metadata_media_type: application/xml
+    metadata_status: 200
+    x-operator: institution
+    operator_basis: >-
+      Served from login.jh.edu, under the institution's own registrable domain jh.edu. Organization
+      element names Johns Hopkins University; support contact is the JHU Enterprise Authentication
+      Team at enterpriseauth@jh.edu.
+    scopes:
+      - johnshopkins.edu
+      - jh.edu
+    endpoints:
+      - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+        service: SingleSignOnService
+        location: https://login.jh.edu/idp/profile/SAML2/Redirect/SSO
+      - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+        service: SingleSignOnService
+        location: https://login.jh.edu/idp/profile/SAML2/POST/SSO
+      - binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+        service: SingleLogoutService
+        location: https://login.jh.edu/cgi-bin/logoff.pl
+    keys:
+      - use: signing
+      - use: encryption
+    local_copy: identity-federation/johns-hopkins-university-idp-saml-metadata.xml
+    probed: '2026-08-19'
+  - entity_id: urn:mace:incommon:johnshopkins.edu
+    role: IdP
+    protocol: urn:oasis:names:tc:SAML:2.0:protocol
+    metadata_url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Ajohnshopkins.edu
+    metadata_media_type: application/samlmetadata+xml
+    metadata_status: 200
+    x-operator: institution
+    operator_basis: >-
+      The entity is Johns Hopkins University's; the MDQ host is InCommon's federation registry, which
+      publishes signed metadata on behalf of its members. The record is registered by
+      https://incommon.org and scoped to johnshopkins.edu.
+    registration_authority: https://incommon.org
+    entity_categories:
+      - http://id.incommon.org/category/research-and-scholarship
+      - http://refeds.org/category/research-and-scholarship
+      - http://id.incommon.org/category/registered-by-incommon
+    assurance_certification:
+      - https://refeds.org/sirtfi
+    scopes:
+      - johnshopkins.edu
+    error_url: https://it.johnshopkins.edu/help/
+    privacy_statement_url: https://www.jhu.edu/university-policies/
+    signed: true
+    signature_algorithm: http://www.w3.org/2001/04/xmldsig-more#rsa-sha256
+    local_copy: identity-federation/johns-hopkins-university-incommon-entity-metadata.xml
+    probed: '2026-08-19'
+notes:
+  - >-
+    The two entity IDs are distinct registrations, not duplicates: urn:mace:incommon:johnshopkins.edu is
+    the InCommon-registered entity, and https://login.jh.edu/idp/shibboleth is the metadata the
+    institution publishes directly from its own host.
+  - >-
+    No vendor operates either surface. Nothing here is derived from a vendor contract, and no Shibboleth
+    or SAML capability has been inferred from a prose claim.
