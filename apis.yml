@@ -341,6 +341,11 @@ apis:
   - Research Information
   - Research Repository
   - Pure
+  - Tenants
+  tags_raw:
+  - Research Information
+  - Research Repository
+  - Pure
   - Tenant
   properties:
   - type: ResearchRepository
