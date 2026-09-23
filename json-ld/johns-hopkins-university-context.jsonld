@@ -39,6 +39,13 @@
       "@type": "@id"
     }
   },
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "https://sis.jhu.edu/api/help",
+    "x-operator": "institution",
+    "note": "JSON-LD context mapping the SIS course vocabulary onto schema.org. Derived by API Evangelist from https://sis.jhu.edu/api/help; not published by Johns Hopkins University."
+  },
   "@type": "CollegeOrUniversity",
   "name": "Johns Hopkins University",
   "url": "https://www.jhu.edu/",

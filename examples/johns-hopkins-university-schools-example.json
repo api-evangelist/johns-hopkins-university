@@ -3,19 +3,65 @@
     "method": "GET",
     "url": "https://sis.jhu.edu/api/classes/codes/schools?key=YOUR_API_KEY"
   },
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "https://sis.jhu.edu/api/classes/codes/schools",
+    "x-operator": "institution",
+    "note": "Illustrative request/response derived by API Evangelist from the operator's published SIS Web API help page. Not a captured live response: SIS key issuance is gated, so this payload was NOT executed."
+  },
   "response": [
-    { "Name": "Bloomberg School of Public Health", "Value": "Bloomberg School of Public Health" },
-    { "Name": "Carey Business School", "Value": "Carey Business School" },
-    { "Name": "Krieger School of Arts and Sciences", "Value": "Krieger School of Arts and Sciences" },
-    { "Name": "Krieger School of Arts and Sciences Advanced Academic Programs", "Value": "Krieger School of Arts and Sciences Advanced Academic Programs" },
-    { "Name": "Nitze School of Advanced International Studies", "Value": "Nitze School of Advanced International Studies" },
-    { "Name": "School of Education", "Value": "School of Education" },
-    { "Name": "School of Nursing", "Value": "School of Nursing" },
-    { "Name": "The Peabody Institute", "Value": "The Peabody Institute" },
-    { "Name": "Whiting School of Engineering", "Value": "Whiting School of Engineering" },
-    { "Name": "Whiting School of Engineering Programs for Professionals", "Value": "Whiting School of Engineering Programs for Professionals" },
-    { "Name": "The Peabody Preparatory", "Value": "The Peabody Preparatory" },
-    { "Name": "Bloomberg School of Public Health Non-Credit", "Value": "Bloomberg School of Public Health Non-Credit" },
-    { "Name": "School of Medicine", "Value": "School of Medicine" }
+    {
+      "Name": "Bloomberg School of Public Health",
+      "Value": "Bloomberg School of Public Health"
+    },
+    {
+      "Name": "Carey Business School",
+      "Value": "Carey Business School"
+    },
+    {
+      "Name": "Krieger School of Arts and Sciences",
+      "Value": "Krieger School of Arts and Sciences"
+    },
+    {
+      "Name": "Krieger School of Arts and Sciences Advanced Academic Programs",
+      "Value": "Krieger School of Arts and Sciences Advanced Academic Programs"
+    },
+    {
+      "Name": "Nitze School of Advanced International Studies",
+      "Value": "Nitze School of Advanced International Studies"
+    },
+    {
+      "Name": "School of Education",
+      "Value": "School of Education"
+    },
+    {
+      "Name": "School of Nursing",
+      "Value": "School of Nursing"
+    },
+    {
+      "Name": "The Peabody Institute",
+      "Value": "The Peabody Institute"
+    },
+    {
+      "Name": "Whiting School of Engineering",
+      "Value": "Whiting School of Engineering"
+    },
+    {
+      "Name": "Whiting School of Engineering Programs for Professionals",
+      "Value": "Whiting School of Engineering Programs for Professionals"
+    },
+    {
+      "Name": "The Peabody Preparatory",
+      "Value": "The Peabody Preparatory"
+    },
+    {
+      "Name": "Bloomberg School of Public Health Non-Credit",
+      "Value": "Bloomberg School of Public Health Non-Credit"
+    },
+    {
+      "Name": "School of Medicine",
+      "Value": "School of Medicine"
+    }
   ]
 }

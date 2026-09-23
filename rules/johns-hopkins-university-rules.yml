@@ -1,4 +1,10 @@
 ---
+x-generated: '2026-08-19'
+x-method: generated
+x-source: https://sis.jhu.edu/api/help
+x-operator: institution
+x-provenance-note: >-
+  Spectral ruleset authored by API Evangelist encoding patterns observed in the JHU SIS OpenAPI. Not published by Johns Hopkins University.
 # Spectral ruleset encoding patterns observed in the JHU SIS Public Course
 # Search API. Apply against the OpenAPI in this repo with:
 #   spectral lint openapi/johns-hopkins-university-sis-course-search.yaml \

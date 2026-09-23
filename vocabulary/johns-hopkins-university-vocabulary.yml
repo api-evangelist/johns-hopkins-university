@@ -1,4 +1,10 @@
 ---
+generated: '2026-08-19'
+method: derived
+source: https://sis.jhu.edu/api/help
+x-operator: institution
+x-provenance-note: >-
+  Controlled vocabulary derived by API Evangelist from the operator's published SIS data dictionary. Not published by Johns Hopkins University.
 vocabulary:
   name: JHU SIS Public Course Search Vocabulary
   description: >-

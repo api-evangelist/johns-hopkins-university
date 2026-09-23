@@ -1,3 +1,9 @@
+generated: '2026-08-19'
+method: derived
+source: https://api.hub.jhu.edu/docs/
+x-operator: institution
+x-provenance-note: >-
+  Rate-limit record derived by API Evangelist. No published rate limit was found on any Johns Hopkins API surface; absence is recorded, not inferred.
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits

@@ -1,16 +1,30 @@
 {
   "provider": "johns-hopkins-university",
   "sources": [
-    "johns-hopkins-university-classes-api-openapi.yml",
-    "johns-hopkins-university-codes-api-openapi.yml"
+    "_original/johns-hopkins-university-hub-api-openapi.yml",
+    "_original/johns-hopkins-university-sis-course-search.yaml"
   ],
   "outputs": [
+    "johns-hopkins-university-content-api-openapi.yml",
+    "johns-hopkins-university-taxonomy-api-openapi.yml",
     "johns-hopkins-university-classes-api-openapi.yml",
     "johns-hopkins-university-codes-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "johns-hopkins-university-hub-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "johns-hopkins-university-sis-course-search.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/johns-hopkins-university-hub-api.yaml: archived document superseded by a larger archived document",
+    "johns-hopkins-university-classes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "johns-hopkins-university-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "johns-hopkins-university-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "johns-hopkins-university-taxonomy-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

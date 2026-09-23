@@ -1,16 +1,7 @@
 openapi: 3.2.0
 info:
   title: Johns Hopkins University Hub Taxonomy API
-  description: 'The Hub API exposes data from the Hub database, the central repository of news articles, announcements, photo galleries, faculty experts and events maintained by Johns Hopkins University. It was built to power the Hub website (https://hub.jhu.edu) and is reused by schools, divisions and centers across the university to display news and events on their own sites.
-
-
-    Every request requires an API key supplied as the `key` query string parameter and an API version supplied as the `v` query string parameter (the current version is `1`). API keys are issued to Johns Hopkins affiliates on request by email.
-
-
-    Responses are JSON in the Hypertext Application Language (HAL) format, composed of an `_embedded` object, a `_links` object and the resource''s own data.
-
-
-    PROVENANCE: this document was DERIVED by API Evangelist from the operator''s own public documentation at https://api.hub.jhu.edu/docs/ on 2026-08-19. It is not published by Johns Hopkins University. Endpoint paths, query string parameters, defaults and response envelope are taken from that documentation; no endpoint, parameter or schema has been invented. Response payloads could not be executed against because key issuance is restricted to Johns Hopkins affiliates, so resource attribute schemas are intentionally left open.'
+  description: The Hub API exposes data from the Hub database, the central repository of news articles, announcements, photo galleries, faculty experts and events maintained by Johns Hopkins University.
   version: '1'
   contact:
     name: Johns Hopkins University Hub API
@@ -710,6 +701,83 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: Resource ID.
+      schema:
+        type: integer
+    v:
+      name: v
+      in: query
+      required: true
+      description: API version. All requests are required to provide a version number. The current API version is 1.
+      schema:
+        type: integer
+        default: 1
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
+      schema:
+        type: string
+    callback:
+      name: callback
+      in: query
+      required: false
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
+      schema:
+        type: string
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      schema:
+        type: integer
+        default: 5
+        maximum: 100
+    subcollection:
+      name: subcollection
+      in: path
+      required: true
+      description: Name of the embedded relationship to return as a collection.
+      schema:
+        type: string
+    order_by:
+      name: order_by
+      in: query
+      required: false
+      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      required: false
+      description: Return resources from a specific page of a collection.
+      schema:
+        type: integer
+        default: 1
+    excluded_ids:
+      name: excluded_ids
+      in: query
+      required: false
+      description: Return resources except those with the given IDs.
+      schema:
+        type: string
+    ids:
+      name: ids
+      in: query
+      required: false
+      description: Return resources with the given IDs.
+      schema:
+        type: string
+      style: form
+      explode: false
   schemas:
     Collection:
       type: object
@@ -742,19 +810,6 @@ components:
       - error
       - message
       - statusCode
-    Links:
-      type: object
-      description: An object that contains links to related resources.
-      additionalProperties: true
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        find:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
-        prev:
-          $ref: '#/components/schemas/Link'
     Resource:
       type: object
       description: A HAL object response containing a single resource. Resource data points vary by resource type; id and type are present on every resource.
@@ -770,6 +825,19 @@ components:
           type: integer
         type:
           type: string
+    Links:
+      type: object
+      description: An object that contains links to related resources.
+      additionalProperties: true
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        find:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+        prev:
+          $ref: '#/components/schemas/Link'
     Link:
       type: object
       properties:
@@ -779,83 +847,6 @@ components:
           type: boolean
       required:
       - href
-  parameters:
-    key:
-      name: key
-      in: query
-      required: true
-      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
-      schema:
-        type: string
-    id:
-      name: id
-      in: path
-      required: true
-      description: Resource ID.
-      schema:
-        type: integer
-    order_by:
-      name: order_by
-      in: query
-      required: false
-      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
-      schema:
-        type: string
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: 'Number of resources to return per page of a collection. Maximum: 100.'
-      schema:
-        type: integer
-        default: 5
-        maximum: 100
-    callback:
-      name: callback
-      in: query
-      required: false
-      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
-      schema:
-        type: string
-    v:
-      name: v
-      in: query
-      required: true
-      description: API version. All requests are required to provide a version number. The current API version is 1.
-      schema:
-        type: integer
-        default: 1
-    excluded_ids:
-      name: excluded_ids
-      in: query
-      required: false
-      description: Return resources except those with the given IDs.
-      schema:
-        type: string
-    subcollection:
-      name: subcollection
-      in: path
-      required: true
-      description: Name of the embedded relationship to return as a collection.
-      schema:
-        type: string
-    ids:
-      name: ids
-      in: query
-      required: false
-      description: Return resources with the given IDs.
-      schema:
-        type: string
-      style: form
-      explode: false
-    page:
-      name: page
-      in: query
-      required: false
-      description: Return resources from a specific page of a collection.
-      schema:
-        type: integer
-        default: 1
   responses:
     NotFound:
       description: No such resource.

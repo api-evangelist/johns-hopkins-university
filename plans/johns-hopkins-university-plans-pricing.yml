@@ -1,3 +1,9 @@
+generated: '2026-08-19'
+method: derived
+source: https://api.hub.jhu.edu/docs/getting-started/connecting/
+x-operator: institution
+x-provenance-note: >-
+  Access-and-plans record derived by API Evangelist from the operators' public documentation. Johns Hopkins publishes no pricing or plan document; access to both APIs is by request, free of charge, and gated to affiliates.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans

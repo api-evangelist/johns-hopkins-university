@@ -1,0 +1,1532 @@
+openapi: 3.0.3
+info:
+  title: Johns Hopkins University Hub API
+  description: 'The Hub API exposes data from the Hub database, the central repository of news articles, announcements,
+    photo galleries, faculty experts and events maintained by Johns Hopkins University. It was built to power the
+    Hub website (https://hub.jhu.edu) and is reused by schools, divisions and centers across the university to display
+    news and events on their own sites.
+
+
+    Every request requires an API key supplied as the `key` query string parameter and an API version supplied as
+    the `v` query string parameter (the current version is `1`). API keys are issued to Johns Hopkins affiliates
+    on request by email.
+
+
+    Responses are JSON in the Hypertext Application Language (HAL) format, composed of an `_embedded` object, a
+    `_links` object and the resource''s own data.
+
+
+    PROVENANCE: this document was DERIVED by API Evangelist from the operator''s own public documentation at https://api.hub.jhu.edu/docs/
+    on 2026-08-19. It is not published by Johns Hopkins University. Endpoint paths, query string parameters, defaults
+    and response envelope are taken from that documentation; no endpoint, parameter or schema has been invented.
+    Response payloads could not be executed against because key issuance is restricted to Johns Hopkins affiliates,
+    so resource attribute schemas are intentionally left open.'
+  version: '1'
+  contact:
+    name: Johns Hopkins University Hub API
+    url: https://api.hub.jhu.edu/docs/
+  termsOfService: https://api.hub.jhu.edu/docs/getting-started/connecting/
+servers:
+- url: https://api.hub.jhu.edu
+  description: Johns Hopkins University Hub API
+security:
+- apiKey: []
+tags:
+- name: Content
+  description: 'Content endpoints: announcements, articles, events, files, galleries and people.'
+- name: Taxonomy
+  description: 'Taxonomy endpoints: the vocabularies used to categorize and attribute Hub content.'
+paths:
+  /announcements:
+    get:
+      tags:
+      - Content
+      operationId: listAnnouncements
+      summary: Get a collection of announcements
+      description: Announcements published to the Johns Hopkins Hub. Returns a HAL collection response. All query
+        string parameters are optional.
+      parameters:
+      - &id001
+        $ref: '#/components/parameters/key'
+      - &id002
+        $ref: '#/components/parameters/v'
+      - &id003
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      - $ref: '#/components/parameters/divisions'
+      - $ref: '#/components/parameters/include_subterms'
+      responses:
+        '200':
+          description: A HAL collection of announcements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /announcements/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getAnnouncement
+      summary: Get one announcement
+      description: Returns a single announcement resource as a HAL object.
+      parameters:
+      - *id001
+      - *id002
+      - *id003
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single announcement object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /announcements/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getAnnouncementSubcollection
+      summary: Get a subcollection of one announcement
+      description: Returns a HAL collection of resources related to a single announcement. The available subcollection
+        names are the names of the embedded relationships on the announcement resource.
+      parameters:
+      - *id001
+      - *id002
+      - *id003
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /articles:
+    get:
+      tags:
+      - Content
+      operationId: listArticles
+      summary: Get a collection of articles
+      description: News articles published to the Johns Hopkins Hub, including At Work and Johns Hopkins Magazine
+        content. Returns a HAL collection response. All query string parameters are optional.
+      parameters:
+      - &id004
+        $ref: '#/components/parameters/key'
+      - &id005
+        $ref: '#/components/parameters/v'
+      - &id006
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      - $ref: '#/components/parameters/divisions'
+      - $ref: '#/components/parameters/include_subterms'
+      - $ref: '#/components/parameters/topics'
+      - $ref: '#/components/parameters/source'
+      responses:
+        '200':
+          description: A HAL collection of articles.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /articles/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getArticle
+      summary: Get one article
+      description: Returns a single article resource as a HAL object.
+      parameters:
+      - *id004
+      - *id005
+      - *id006
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single article object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /articles/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getArticleSubcollection
+      summary: Get a subcollection of one article
+      description: Returns a HAL collection of resources related to a single article. The available subcollection
+        names are the names of the embedded relationships on the article resource.
+      parameters:
+      - *id004
+      - *id005
+      - *id006
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /events:
+    get:
+      tags:
+      - Content
+      operationId: listEvents
+      summary: Get a collection of events
+      description: Events on the Johns Hopkins events calendar. Events may be one-time or recurring, and may have
+        a specific start and end time or last all day. Returns a HAL collection response. All query string parameters
+        are optional.
+      parameters:
+      - &id007
+        $ref: '#/components/parameters/key'
+      - &id008
+        $ref: '#/components/parameters/v'
+      - &id009
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      - $ref: '#/components/parameters/divisions'
+      - $ref: '#/components/parameters/include_subterms'
+      - $ref: '#/components/parameters/date'
+      - $ref: '#/components/parameters/event_categories'
+      - $ref: '#/components/parameters/locations'
+      - $ref: '#/components/parameters/open_to'
+      responses:
+        '200':
+          description: A HAL collection of events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /events/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getEvent
+      summary: Get one event
+      description: Returns a single event resource as a HAL object.
+      parameters:
+      - *id007
+      - *id008
+      - *id009
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single event object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /events/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getEventSubcollection
+      summary: Get a subcollection of one event
+      description: Returns a HAL collection of resources related to a single event. The available subcollection
+        names are the names of the embedded relationships on the event resource.
+      parameters:
+      - *id007
+      - *id008
+      - *id009
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /files:
+    get:
+      tags:
+      - Content
+      operationId: listFiles
+      summary: Get a collection of files
+      description: Files (images and documents) attached to Hub content. Returns a HAL collection response. All
+        query string parameters are optional.
+      parameters:
+      - &id010
+        $ref: '#/components/parameters/key'
+      - &id011
+        $ref: '#/components/parameters/v'
+      - &id012
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      responses:
+        '200':
+          description: A HAL collection of files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /files/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getFile
+      summary: Get one file
+      description: Returns a single file resource as a HAL object.
+      parameters:
+      - *id010
+      - *id011
+      - *id012
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single file object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /files/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getFileSubcollection
+      summary: Get a subcollection of one file
+      description: Returns a HAL collection of resources related to a single file. The available subcollection names
+        are the names of the embedded relationships on the file resource.
+      parameters:
+      - *id010
+      - *id011
+      - *id012
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /galleries:
+    get:
+      tags:
+      - Content
+      operationId: listGalleries
+      summary: Get a collection of gallerys
+      description: Photo galleries published to the Johns Hopkins Hub. Returns a HAL collection response. All query
+        string parameters are optional.
+      parameters:
+      - &id013
+        $ref: '#/components/parameters/key'
+      - &id014
+        $ref: '#/components/parameters/v'
+      - &id015
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      - $ref: '#/components/parameters/divisions'
+      - $ref: '#/components/parameters/include_subterms'
+      responses:
+        '200':
+          description: A HAL collection of gallerys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /galleries/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getGallerie
+      summary: Get one gallery
+      description: Returns a single gallery resource as a HAL object.
+      parameters:
+      - *id013
+      - *id014
+      - *id015
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single gallery object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /galleries/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getGallerieSubcollection
+      summary: Get a subcollection of one gallery
+      description: Returns a HAL collection of resources related to a single gallery. The available subcollection
+        names are the names of the embedded relationships on the gallery resource.
+      parameters:
+      - *id013
+      - *id014
+      - *id015
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /people:
+    get:
+      tags:
+      - Content
+      operationId: listPeople
+      summary: Get a collection of persons
+      description: People records, specifically faculty experts and media representatives. Returns a HAL collection
+        response. All query string parameters are optional.
+      parameters:
+      - &id016
+        $ref: '#/components/parameters/key'
+      - &id017
+        $ref: '#/components/parameters/v'
+      - &id018
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/channels'
+      - $ref: '#/components/parameters/person_type'
+      responses:
+        '200':
+          description: A HAL collection of persons.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /people/{id}:
+    get:
+      tags:
+      - Content
+      operationId: getPeople
+      summary: Get one person
+      description: Returns a single person resource as a HAL object.
+      parameters:
+      - *id016
+      - *id017
+      - *id018
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single person object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /people/{id}/{subcollection}:
+    get:
+      tags:
+      - Content
+      operationId: getPeopleSubcollection
+      summary: Get a subcollection of one person
+      description: Returns a HAL collection of resources related to a single person. The available subcollection
+        names are the names of the embedded relationships on the person resource.
+      parameters:
+      - *id016
+      - *id017
+      - *id018
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /announcement_categories:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listAnnouncementCategories
+      summary: Get a collection of announcement categorys
+      description: Non-hierarchical taxonomy used to categorize announcements. Returns a HAL collection response.
+        All query string parameters are optional.
+      parameters:
+      - &id019
+        $ref: '#/components/parameters/key'
+      - &id020
+        $ref: '#/components/parameters/v'
+      - &id021
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of announcement categorys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /announcement_categories/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getAnnouncementCategorie
+      summary: Get one announcement category
+      description: Returns a single announcement category resource as a HAL object.
+      parameters:
+      - *id019
+      - *id020
+      - *id021
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single announcement category object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /announcement_categories/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getAnnouncementCategorieSubcollection
+      summary: Get a subcollection of one announcement category
+      description: Returns a HAL collection of resources related to a single announcement category. The available
+        subcollection names are the names of the embedded relationships on the announcement category resource.
+      parameters:
+      - *id019
+      - *id020
+      - *id021
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /channels:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listChannels
+      summary: Get a collection of channels
+      description: Hierarchical taxonomy used to create custom feeds of content. Returns a HAL collection response.
+        All query string parameters are optional.
+      parameters:
+      - &id022
+        $ref: '#/components/parameters/key'
+      - &id023
+        $ref: '#/components/parameters/v'
+      - &id024
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of channels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /channels/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getChannel
+      summary: Get one channel
+      description: Returns a single channel resource as a HAL object.
+      parameters:
+      - *id022
+      - *id023
+      - *id024
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single channel object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /channels/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getChannelSubcollection
+      summary: Get a subcollection of one channel
+      description: Returns a HAL collection of resources related to a single channel. The available subcollection
+        names are the names of the embedded relationships on the channel resource.
+      parameters:
+      - *id022
+      - *id023
+      - *id024
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /divisions:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listDivisions
+      summary: Get a collection of divisions
+      description: Non-hierarchical taxonomy used to attribute content to a school or division. Returns a HAL collection
+        response. All query string parameters are optional.
+      parameters:
+      - &id025
+        $ref: '#/components/parameters/key'
+      - &id026
+        $ref: '#/components/parameters/v'
+      - &id027
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of divisions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /divisions/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getDivision
+      summary: Get one division
+      description: Returns a single division resource as a HAL object.
+      parameters:
+      - *id025
+      - *id026
+      - *id027
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single division object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /divisions/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getDivisionSubcollection
+      summary: Get a subcollection of one division
+      description: Returns a HAL collection of resources related to a single division. The available subcollection
+        names are the names of the embedded relationships on the division resource.
+      parameters:
+      - *id025
+      - *id026
+      - *id027
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event_categories:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listEventCategories
+      summary: Get a collection of event categorys
+      description: Hierarchical taxonomy used to categorize events. Returns a HAL collection response. All query
+        string parameters are optional.
+      parameters:
+      - &id028
+        $ref: '#/components/parameters/key'
+      - &id029
+        $ref: '#/components/parameters/v'
+      - &id030
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of event categorys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event_categories/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getEventCategorie
+      summary: Get one event category
+      description: Returns a single event category resource as a HAL object.
+      parameters:
+      - *id028
+      - *id029
+      - *id030
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single event category object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event_categories/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getEventCategorieSubcollection
+      summary: Get a subcollection of one event category
+      description: Returns a HAL collection of resources related to a single event category. The available subcollection
+        names are the names of the embedded relationships on the event category resource.
+      parameters:
+      - *id028
+      - *id029
+      - *id030
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_affiliations:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listFacultyExpertAffiliations
+      summary: Get a collection of faculty expert affiliations
+      description: Non-hierarchical taxonomy used to assign affiliations to people, specifically faculty experts.
+        Returns a HAL collection response. All query string parameters are optional.
+      parameters:
+      - &id031
+        $ref: '#/components/parameters/key'
+      - &id032
+        $ref: '#/components/parameters/v'
+      - &id033
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of faculty expert affiliations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_affiliations/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getFacultyExpertAffiliation
+      summary: Get one faculty expert affiliation
+      description: Returns a single faculty expert affiliation resource as a HAL object.
+      parameters:
+      - *id031
+      - *id032
+      - *id033
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single faculty expert affiliation object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_affiliations/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getFacultyExpertAffiliationSubcollection
+      summary: Get a subcollection of one faculty expert affiliation
+      description: Returns a HAL collection of resources related to a single faculty expert affiliation. The available
+        subcollection names are the names of the embedded relationships on the faculty expert affiliation resource.
+      parameters:
+      - *id031
+      - *id032
+      - *id033
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_topics:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listFacultyExpertTopics
+      summary: Get a collection of faculty expert topics
+      description: Non-hierarchical taxonomy used to categorize people, specifically faculty experts. Returns a
+        HAL collection response. All query string parameters are optional.
+      parameters:
+      - &id034
+        $ref: '#/components/parameters/key'
+      - &id035
+        $ref: '#/components/parameters/v'
+      - &id036
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of faculty expert topics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_topics/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getFacultyExpertTopic
+      summary: Get one faculty expert topic
+      description: Returns a single faculty expert topic resource as a HAL object.
+      parameters:
+      - *id034
+      - *id035
+      - *id036
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single faculty expert topic object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /faculty_expert_topics/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getFacultyExpertTopicSubcollection
+      summary: Get a subcollection of one faculty expert topic
+      description: Returns a HAL collection of resources related to a single faculty expert topic. The available
+        subcollection names are the names of the embedded relationships on the faculty expert topic resource.
+      parameters:
+      - *id034
+      - *id035
+      - *id036
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /locations:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listLocations
+      summary: Get a collection of locations
+      description: Hierarchical taxonomy used to assign events to physical locations. Returns a HAL collection response.
+        All query string parameters are optional.
+      parameters:
+      - &id037
+        $ref: '#/components/parameters/key'
+      - &id038
+        $ref: '#/components/parameters/v'
+      - &id039
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /locations/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getLocation
+      summary: Get one location
+      description: Returns a single location resource as a HAL object.
+      parameters:
+      - *id037
+      - *id038
+      - *id039
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single location object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /locations/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getLocationSubcollection
+      summary: Get a subcollection of one location
+      description: Returns a HAL collection of resources related to a single location. The available subcollection
+        names are the names of the embedded relationships on the location resource.
+      parameters:
+      - *id037
+      - *id038
+      - *id039
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tags:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listTags
+      summary: Get a collection of tags
+      description: Granular, topic-based, non-hierarchical taxonomy used to categorize announcements, articles,
+        and events. Returns a HAL collection response. All query string parameters are optional.
+      parameters:
+      - &id040
+        $ref: '#/components/parameters/key'
+      - &id041
+        $ref: '#/components/parameters/v'
+      - &id042
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of tags.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tags/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getTag
+      summary: Get one tag
+      description: Returns a single tag resource as a HAL object.
+      parameters:
+      - *id040
+      - *id041
+      - *id042
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single tag object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tags/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getTagSubcollection
+      summary: Get a subcollection of one tag
+      description: Returns a HAL collection of resources related to a single tag. The available subcollection names
+        are the names of the embedded relationships on the tag resource.
+      parameters:
+      - *id040
+      - *id041
+      - *id042
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /topics:
+    get:
+      tags:
+      - Taxonomy
+      operationId: listTopics
+      summary: Get a collection of topics
+      description: High-level topic-based hierarchical taxonomy used to categorize articles and galleries. Returns
+        a HAL collection response. All query string parameters are optional.
+      parameters:
+      - &id043
+        $ref: '#/components/parameters/key'
+      - &id044
+        $ref: '#/components/parameters/v'
+      - &id045
+        $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/ids'
+      - $ref: '#/components/parameters/excluded_ids'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of topics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /topics/{id}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getTopic
+      summary: Get one topic
+      description: Returns a single topic resource as a HAL object.
+      parameters:
+      - *id043
+      - *id044
+      - *id045
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: A single topic object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /topics/{id}/{subcollection}:
+    get:
+      tags:
+      - Taxonomy
+      operationId: getTopicSubcollection
+      summary: Get a subcollection of one topic
+      description: Returns a HAL collection of resources related to a single topic. The available subcollection
+        names are the names of the embedded relationships on the topic resource.
+      parameters:
+      - *id043
+      - *id044
+      - *id045
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/subcollection'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/per_page'
+      responses:
+        '200':
+          description: A HAL collection of related resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: API key issued by the Hub API team. Johns Hopkins affiliates request a key by email; the API
+        is not open to the general public.
+  parameters:
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key. All requests to the API are required to authenticate using an API key supplied as the
+        `key` query string parameter.
+      schema:
+        type: string
+    v:
+      name: v
+      in: query
+      required: true
+      description: API version. All requests are required to provide a version number. The current API version is
+        1.
+      schema:
+        type: integer
+        default: 1
+    callback:
+      name: callback
+      in: query
+      required: false
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate
+        JSONP requests.
+      schema:
+        type: string
+    id:
+      name: id
+      in: path
+      required: true
+      description: Resource ID.
+      schema:
+        type: integer
+    subcollection:
+      name: subcollection
+      in: path
+      required: true
+      description: Name of the embedded relationship to return as a collection.
+      schema:
+        type: string
+    ids:
+      name: ids
+      in: query
+      required: false
+      description: Return resources with the given IDs.
+      schema:
+        type: string
+      style: form
+      explode: false
+    excluded_ids:
+      name: excluded_ids
+      in: query
+      required: false
+      description: Return resources except those with the given IDs.
+      schema:
+        type: string
+    order_by:
+      name: order_by
+      in: query
+      required: false
+      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...].
+        ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      required: false
+      description: Return resources from a specific page of a collection.
+      schema:
+        type: integer
+        default: 1
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      schema:
+        type: integer
+        default: 5
+        maximum: 100
+    channels:
+      name: channels
+      in: query
+      required: false
+      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
+      schema:
+        type: string
+    divisions:
+      name: divisions
+      in: query
+      required: false
+      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
+      schema:
+        type: string
+    include_subterms:
+      name: include_subterms
+      in: query
+      required: false
+      description: Works with hierarchical taxonomy parameters so that returned resources are assigned to either
+        the specified term(s) or the children of the specified term(s).
+      schema:
+        type: string
+    topics:
+      name: topics
+      in: query
+      required: false
+      description: 'Return resources assigned to the given topics (comma-separated list of topic IDs). Hierarchical:
+        combine with include_subterms.'
+      schema:
+        type: string
+    source:
+      name: source
+      in: query
+      required: false
+      description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
+      schema:
+        type: string
+    date:
+      name: date
+      in: query
+      required: false
+      description: Return events that take place on a specific date or within a date range, formatted YYYY-MM-DD[,YYYY-MM-DD].
+      schema:
+        type: string
+    event_categories:
+      name: event_categories
+      in: query
+      required: false
+      description: Return events assigned to the given event categories (comma-separated list of IDs).
+      schema:
+        type: string
+    locations:
+      name: locations
+      in: query
+      required: false
+      description: 'Return events assigned to the given locations (comma-separated list of IDs). Hierarchical: combine
+        with include_subterms.'
+      schema:
+        type: string
+    open_to:
+      name: open_to
+      in: query
+      required: false
+      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
+      schema:
+        type: string
+        default: everyone
+    person_type:
+      name: type
+      in: query
+      required: false
+      description: 'Return people of a specific type: faculty_expert or media_rep.'
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: The request did not carry a valid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: 'API requests require authentication. Please see the API documentation for more information:
+              https://api.hub.jhu.edu/docs'
+            statusCode: 401
+    NotFound:
+      description: No such resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: Not found.
+            statusCode: 404
+  schemas:
+    Links:
+      type: object
+      description: An object that contains links to related resources.
+      additionalProperties: true
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        find:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+        prev:
+          $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
+      required:
+      - href
+    Resource:
+      type: object
+      description: A HAL object response containing a single resource. Resource data points vary by resource type;
+        id and type are present on every resource.
+      additionalProperties: true
+      properties:
+        _embedded:
+          type: object
+          description: An object that contains embedded resources.
+          additionalProperties: true
+        _links:
+          $ref: '#/components/schemas/Links'
+        id:
+          type: integer
+        type:
+          type: string
+    Collection:
+      type: object
+      description: A HAL collection response. The requested resources are carried inside _embedded, keyed by the
+        plural resource name.
+      additionalProperties: true
+      properties:
+        _embedded:
+          type: object
+          additionalProperties: true
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          type: integer
+        per_page:
+          type: integer
+        return_count:
+          type: integer
+        total_available:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+        message:
+          type: string
+        statusCode:
+          type: integer
+      required:
+      - error
+      - message
+      - statusCode

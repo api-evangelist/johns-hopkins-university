@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Self-Service Public Course Search API (SIS) Classes Codes API
+  title: Self-Service Public Course Search API (SIS) Codes API
   description: Returns, in JSON format, a list of courses available through the Johns Hopkins University Public Course Search (https://sis.jhu.edu/classes). Results can be filtered by school, department, course number, section number, and academic term, or via a custom advanced-search query string. All requests require an API key supplied as the `key` query parameter. Endpoints, parameters and the response data dictionary are derived from the official SIS Web API Help page at https://sis.jhu.edu/api/help.
   version: 1.0.0
   contact:
@@ -90,14 +90,6 @@ components:
           type: string
         Value:
           type: string
-  responses:
-    Unauthorized:
-      description: API key missing or invalid.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: 'Unable to authenticate: API Key parameter is missing in URL'
   parameters:
     key:
       name: key
@@ -106,6 +98,14 @@ components:
       description: API key issued after registration at https://sis.jhu.edu/api/help.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: API key missing or invalid.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Unable to authenticate: API Key parameter is missing in URL'
   securitySchemes:
     apiKey:
       type: apiKey

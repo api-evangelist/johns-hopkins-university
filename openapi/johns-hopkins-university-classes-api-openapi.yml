@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Self-Service Public Course Search API (SIS) Classes API
   description: Returns, in JSON format, a list of courses available through the Johns Hopkins University Public Course Search (https://sis.jhu.edu/classes). Results can be filtered by school, department, course number, section number, and academic term, or via a custom advanced-search query string. All requests require an API key supplied as the `key` query parameter. Endpoints, parameters and the response data dictionary are derived from the official SIS Web API Help page at https://sis.jhu.edu/api/help.
@@ -210,6 +210,96 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Course:
+      type: object
+      description: A course offering record from the Public Course Search.
+      properties:
+        AllDepartments:
+          type: string
+          description: All departments assigned to the course, separated by ^.
+        Areas:
+          type: string
+          description: All areas assigned to the course, separated by ^.
+        Building:
+          type: string
+          description: All buildings where the course is held, separated by ^.
+        CoursePrefix:
+          type: string
+        Credits:
+          type: string
+        Department:
+          type: string
+          description: Department that offers the course.
+        DOW:
+          type: string
+          description: Numeric representation of the days of week (Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64).
+        DOWSort:
+          type: string
+          description: DOW value plus time in military format, for sorting.
+        HasBio:
+          type: string
+          description: Indicates if instructors have Bio information to display.
+        InstructionMethod:
+          type: string
+        Instructors:
+          type: string
+          description: Names of instructors, separated by comma.
+        InstructorsFullName:
+          type: string
+        IsWritingIntensive:
+          type: string
+          description: Indicates if the course is writing intensive (Yes/No).
+        Level:
+          type: string
+        Location:
+          type: string
+        MaxSeats:
+          type: string
+        Meetings:
+          type: string
+          description: Comma separated list of days and times (e.g. M 3:30PM - 5:20PM).
+        OfferingName:
+          type: string
+          description: Offering name (e.g. NR.110.305).
+        OpenSeats:
+          type: string
+        Repeatable:
+          type: string
+        SchoolName:
+          type: string
+        SeatsAvailable:
+          type: string
+          description: Available seats out of maximum (e.g. 7/65).
+        SectionCoReqNotes:
+          type: string
+        SectionCoRequisites:
+          type: string
+        SectionName:
+          type: string
+          description: Section name (e.g. 0101).
+        SectionRegRestrictions:
+          type: string
+        Status:
+          type: string
+          description: Section status (e.g. Open).
+        SectionDetails:
+          $ref: '#/components/schemas/SectionDetail'
+        SubDepartment:
+          type: string
+        Term:
+          type: string
+        Term_IDR:
+          type: string
+        Term_JSS:
+          type: string
+        TermStartDate:
+          type: string
+        TimeOfDay:
+          type: string
+        Title:
+          type: string
+        Waitlisted:
+          type: string
     SectionDetail:
       type: object
       description: Section detail information returned when a full section is requested.
@@ -311,104 +401,6 @@ components:
                 type: string
               ValidTo:
                 type: string
-    Course:
-      type: object
-      description: A course offering record from the Public Course Search.
-      properties:
-        AllDepartments:
-          type: string
-          description: All departments assigned to the course, separated by ^.
-        Areas:
-          type: string
-          description: All areas assigned to the course, separated by ^.
-        Building:
-          type: string
-          description: All buildings where the course is held, separated by ^.
-        CoursePrefix:
-          type: string
-        Credits:
-          type: string
-        Department:
-          type: string
-          description: Department that offers the course.
-        DOW:
-          type: string
-          description: Numeric representation of the days of week (Mon=1, Tue=2, Wed=4, Thu=8, Fri=16, Sat=32, Sun=64).
-        DOWSort:
-          type: string
-          description: DOW value plus time in military format, for sorting.
-        HasBio:
-          type: string
-          description: Indicates if instructors have Bio information to display.
-        InstructionMethod:
-          type: string
-        Instructors:
-          type: string
-          description: Names of instructors, separated by comma.
-        InstructorsFullName:
-          type: string
-        IsWritingIntensive:
-          type: string
-          description: Indicates if the course is writing intensive (Yes/No).
-        Level:
-          type: string
-        Location:
-          type: string
-        MaxSeats:
-          type: string
-        Meetings:
-          type: string
-          description: Comma separated list of days and times (e.g. M 3:30PM - 5:20PM).
-        OfferingName:
-          type: string
-          description: Offering name (e.g. NR.110.305).
-        OpenSeats:
-          type: string
-        Repeatable:
-          type: string
-        SchoolName:
-          type: string
-        SeatsAvailable:
-          type: string
-          description: Available seats out of maximum (e.g. 7/65).
-        SectionCoReqNotes:
-          type: string
-        SectionCoRequisites:
-          type: string
-        SectionName:
-          type: string
-          description: Section name (e.g. 0101).
-        SectionRegRestrictions:
-          type: string
-        Status:
-          type: string
-          description: Section status (e.g. Open).
-        SectionDetails:
-          $ref: '#/components/schemas/SectionDetail'
-        SubDepartment:
-          type: string
-        Term:
-          type: string
-        Term_IDR:
-          type: string
-        Term_JSS:
-          type: string
-        TermStartDate:
-          type: string
-        TimeOfDay:
-          type: string
-        Title:
-          type: string
-        Waitlisted:
-          type: string
-  responses:
-    Unauthorized:
-      description: API key missing or invalid.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: 'Unable to authenticate: API Key parameter is missing in URL'
   parameters:
     key:
       name: key
@@ -417,6 +409,14 @@ components:
       description: API key issued after registration at https://sis.jhu.edu/api/help.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: API key missing or invalid.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Unable to authenticate: API Key parameter is missing in URL'
   securitySchemes:
     apiKey:
       type: apiKey

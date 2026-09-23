@@ -3,6 +3,13 @@
     "method": "GET",
     "url": "https://sis.jhu.edu/api/classes?key=YOUR_API_KEY&School=Whiting%20School%20of%20Engineering&Term=Fall%202013&WritingIntensive=No"
   },
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "https://sis.jhu.edu/api/help",
+    "x-operator": "institution",
+    "note": "Illustrative request/response derived by API Evangelist from the operator's published SIS Web API help page. Not a captured live response: SIS key issuance is gated, so this payload was NOT executed."
+  },
   "response": [
     {
       "OfferingName": "EN.601.220",
