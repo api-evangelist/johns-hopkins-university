@@ -495,26 +495,32 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    v:
-      name: v
-      in: query
+    subcollection:
+      name: subcollection
+      in: path
       required: true
-      description: API version. All requests are required to provide a version number. The current API version is 1.
+      description: Name of the embedded relationship to return as a collection.
+      schema:
+        type: string
+    id:
+      name: id
+      in: path
+      required: true
+      description: Resource ID.
       schema:
         type: integer
-        default: 1
+    channels:
+      name: channels
+      in: query
+      required: false
+      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
+      schema:
+        type: string
     key:
       name: key
       in: query
       required: true
       description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
-      schema:
-        type: string
-    callback:
-      name: callback
-      in: query
-      required: false
-      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
       schema:
         type: string
     page:
@@ -525,18 +531,11 @@ components:
       schema:
         type: integer
         default: 1
-    excluded_ids:
-      name: excluded_ids
+    divisions:
+      name: divisions
       in: query
       required: false
-      description: Return resources except those with the given IDs.
-      schema:
-        type: string
-    subcollection:
-      name: subcollection
-      in: path
-      required: true
-      description: Name of the embedded relationship to return as a collection.
+      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
       schema:
         type: string
     date:
@@ -544,58 +543,6 @@ components:
       in: query
       required: false
       description: Return events that take place on a specific date or within a date range, formatted YYYY-MM-DD[,YYYY-MM-DD].
-      schema:
-        type: string
-    channels:
-      name: channels
-      in: query
-      required: false
-      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
-      schema:
-        type: string
-    open_to:
-      name: open_to
-      in: query
-      required: false
-      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
-      schema:
-        type: string
-        default: everyone
-    locations:
-      name: locations
-      in: query
-      required: false
-      description: 'Return events assigned to the given locations (comma-separated list of IDs). Hierarchical: combine with include_subterms.'
-      schema:
-        type: string
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: 'Number of resources to return per page of a collection. Maximum: 100.'
-      schema:
-        type: integer
-        default: 5
-        maximum: 100
-    order_by:
-      name: order_by
-      in: query
-      required: false
-      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
-      schema:
-        type: string
-    include_subterms:
-      name: include_subterms
-      in: query
-      required: false
-      description: Works with hierarchical taxonomy parameters so that returned resources are assigned to either the specified term(s) or the children of the specified term(s).
-      schema:
-        type: string
-    event_categories:
-      name: event_categories
-      in: query
-      required: false
-      description: Return events assigned to the given event categories (comma-separated list of IDs).
       schema:
         type: string
     topics:
@@ -621,13 +568,29 @@ components:
       description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
       schema:
         type: string
-    id:
-      name: id
-      in: path
+    v:
+      name: v
+      in: query
       required: true
-      description: Resource ID.
+      description: API version. All requests are required to provide a version number. The current API version is 1.
       schema:
         type: integer
+        default: 1
+    open_to:
+      name: open_to
+      in: query
+      required: false
+      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
+      schema:
+        type: string
+        default: everyone
+    excluded_ids:
+      name: excluded_ids
+      in: query
+      required: false
+      description: Return resources except those with the given IDs.
+      schema:
+        type: string
     person_type:
       name: type
       in: query
@@ -635,13 +598,71 @@ components:
       description: 'Return people of a specific type: faculty_expert or media_rep.'
       schema:
         type: string
-    divisions:
-      name: divisions
+    locations:
+      name: locations
       in: query
       required: false
-      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
+      description: 'Return events assigned to the given locations (comma-separated list of IDs). Hierarchical: combine with include_subterms.'
       schema:
         type: string
+    callback:
+      name: callback
+      in: query
+      required: false
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
+      schema:
+        type: string
+    event_categories:
+      name: event_categories
+      in: query
+      required: false
+      description: Return events assigned to the given event categories (comma-separated list of IDs).
+      schema:
+        type: string
+    include_subterms:
+      name: include_subterms
+      in: query
+      required: false
+      description: Works with hierarchical taxonomy parameters so that returned resources are assigned to either the specified term(s) or the children of the specified term(s).
+      schema:
+        type: string
+    order_by:
+      name: order_by
+      in: query
+      required: false
+      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
+      schema:
+        type: string
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      schema:
+        type: integer
+        default: 5
+        maximum: 100
+  responses:
+    Unauthorized:
+      description: The request did not carry a valid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: 'API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs'
+            statusCode: 401
+    NotFound:
+      description: No such resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: Not found.
+            statusCode: 404
   schemas:
     Resource:
       type: object
@@ -658,19 +679,6 @@ components:
           type: integer
         type:
           type: string
-    Links:
-      type: object
-      description: An object that contains links to related resources.
-      additionalProperties: true
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        find:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
-        prev:
-          $ref: '#/components/schemas/Link'
     Collection:
       type: object
       description: A HAL collection response. The requested resources are carried inside _embedded, keyed by the plural resource name.
@@ -689,6 +697,19 @@ components:
           type: integer
         total_available:
           type: integer
+    Links:
+      type: object
+      description: An object that contains links to related resources.
+      additionalProperties: true
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        find:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+        prev:
+          $ref: '#/components/schemas/Link'
     Error:
       type: object
       properties:
@@ -711,27 +732,6 @@ components:
           type: boolean
       required:
       - href
-  responses:
-    NotFound:
-      description: No such resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: true
-            message: Not found.
-            statusCode: 404
-    Unauthorized:
-      description: The request did not carry a valid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: true
-            message: 'API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs'
-            statusCode: 401
   securitySchemes:
     apiKey:
       type: apiKey
