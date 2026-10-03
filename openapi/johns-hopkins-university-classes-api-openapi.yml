@@ -195,8 +195,8 @@ paths:
         schema:
           type: string
           enum:
-          - true
-          - false
+          - 'Yes'
+          - 'No'
       responses:
         '200':
           description: Matching course records.
@@ -401,14 +401,6 @@ components:
           type: string
         Waitlisted:
           type: string
-  parameters:
-    key:
-      name: key
-      in: query
-      required: true
-      description: API key issued after registration at https://sis.jhu.edu/api/help.
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: API key missing or invalid.
@@ -417,6 +409,14 @@ components:
           schema:
             type: string
           example: 'Unable to authenticate: API Key parameter is missing in URL'
+  parameters:
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key issued after registration at https://sis.jhu.edu/api/help.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

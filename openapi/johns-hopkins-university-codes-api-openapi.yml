@@ -90,14 +90,6 @@ components:
           type: string
         Value:
           type: string
-  parameters:
-    key:
-      name: key
-      in: query
-      required: true
-      description: API key issued after registration at https://sis.jhu.edu/api/help.
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: API key missing or invalid.
@@ -106,6 +98,14 @@ components:
           schema:
             type: string
           example: 'Unable to authenticate: API Key parameter is missing in URL'
+  parameters:
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key issued after registration at https://sis.jhu.edu/api/help.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey
