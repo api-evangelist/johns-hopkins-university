@@ -495,6 +495,28 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    topics:
+      name: topics
+      in: query
+      required: false
+      description: 'Return resources assigned to the given topics (comma-separated list of topic IDs). Hierarchical: combine with include_subterms.'
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      required: false
+      description: Return resources from a specific page of a collection.
+      schema:
+        type: integer
+        default: 1
+    source:
+      name: source
+      in: query
+      required: false
+      description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
+      schema:
+        type: string
     include_subterms:
       name: include_subterms
       in: query
@@ -502,31 +524,49 @@ components:
       description: Works with hierarchical taxonomy parameters so that returned resources are assigned to either the specified term(s) or the children of the specified term(s).
       schema:
         type: string
-    ids:
-      name: ids
+    divisions:
+      name: divisions
       in: query
       required: false
-      description: Return resources with the given IDs.
+      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
       schema:
         type: string
-      style: form
-      explode: false
-    per_page:
-      name: per_page
+    v:
+      name: v
+      in: query
+      required: true
+      description: API version. All requests are required to provide a version number. The current API version is 1.
+      schema:
+        type: integer
+        default: 1
+    callback:
+      name: callback
       in: query
       required: false
-      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
       schema:
-        type: integer
-        default: 5
-        maximum: 100
-    id:
-      name: id
-      in: path
+        type: string
+    key:
+      name: key
+      in: query
       required: true
-      description: Resource ID.
+      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
       schema:
-        type: integer
+        type: string
+    date:
+      name: date
+      in: query
+      required: false
+      description: Return events that take place on a specific date or within a date range, formatted YYYY-MM-DD[,YYYY-MM-DD].
+      schema:
+        type: string
+    channels:
+      name: channels
+      in: query
+      required: false
+      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
+      schema:
+        type: string
     subcollection:
       name: subcollection
       in: path
@@ -534,6 +574,14 @@ components:
       description: Name of the embedded relationship to return as a collection.
       schema:
         type: string
+    open_to:
+      name: open_to
+      in: query
+      required: false
+      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
+      schema:
+        type: string
+        default: everyone
     locations:
       name: locations
       in: query
@@ -548,42 +596,6 @@ components:
       description: Return events assigned to the given event categories (comma-separated list of IDs).
       schema:
         type: string
-    open_to:
-      name: open_to
-      in: query
-      required: false
-      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
-      schema:
-        type: string
-        default: everyone
-    source:
-      name: source
-      in: query
-      required: false
-      description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
-      schema:
-        type: string
-    callback:
-      name: callback
-      in: query
-      required: false
-      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
-      schema:
-        type: string
-    divisions:
-      name: divisions
-      in: query
-      required: false
-      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
-      schema:
-        type: string
-    person_type:
-      name: type
-      in: query
-      required: false
-      description: 'Return people of a specific type: faculty_expert or media_rep.'
-      schema:
-        type: string
     excluded_ids:
       name: excluded_ids
       in: query
@@ -591,11 +603,20 @@ components:
       description: Return resources except those with the given IDs.
       schema:
         type: string
-    date:
-      name: date
+    per_page:
+      name: per_page
       in: query
       required: false
-      description: Return events that take place on a specific date or within a date range, formatted YYYY-MM-DD[,YYYY-MM-DD].
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      schema:
+        type: integer
+        default: 5
+        maximum: 100
+    person_type:
+      name: type
+      in: query
+      required: false
+      description: 'Return people of a specific type: faculty_expert or media_rep.'
       schema:
         type: string
     order_by:
@@ -605,44 +626,32 @@ components:
       description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
       schema:
         type: string
-    key:
-      name: key
+    ids:
+      name: ids
       in: query
-      required: true
-      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
+      required: false
+      description: Return resources with the given IDs.
       schema:
         type: string
-    v:
-      name: v
-      in: query
+      style: form
+      explode: false
+    id:
+      name: id
+      in: path
       required: true
-      description: API version. All requests are required to provide a version number. The current API version is 1.
+      description: Resource ID.
       schema:
         type: integer
-        default: 1
-    channels:
-      name: channels
-      in: query
-      required: false
-      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
-      schema:
-        type: string
-    page:
-      name: page
-      in: query
-      required: false
-      description: Return resources from a specific page of a collection.
-      schema:
-        type: integer
-        default: 1
-    topics:
-      name: topics
-      in: query
-      required: false
-      description: 'Return resources assigned to the given topics (comma-separated list of topic IDs). Hierarchical: combine with include_subterms.'
-      schema:
-        type: string
   schemas:
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
+      required:
+      - href
     Links:
       type: object
       description: An object that contains links to related resources.
@@ -656,6 +665,21 @@ components:
           $ref: '#/components/schemas/Link'
         prev:
           $ref: '#/components/schemas/Link'
+    Resource:
+      type: object
+      description: A HAL object response containing a single resource. Resource data points vary by resource type; id and type are present on every resource.
+      additionalProperties: true
+      properties:
+        _embedded:
+          type: object
+          description: An object that contains embedded resources.
+          additionalProperties: true
+        _links:
+          $ref: '#/components/schemas/Links'
+        id:
+          type: integer
+        type:
+          type: string
     Collection:
       type: object
       description: A HAL collection response. The requested resources are carried inside _embedded, keyed by the plural resource name.
@@ -687,41 +711,7 @@ components:
       - error
       - message
       - statusCode
-    Resource:
-      type: object
-      description: A HAL object response containing a single resource. Resource data points vary by resource type; id and type are present on every resource.
-      additionalProperties: true
-      properties:
-        _embedded:
-          type: object
-          description: An object that contains embedded resources.
-          additionalProperties: true
-        _links:
-          $ref: '#/components/schemas/Links'
-        id:
-          type: integer
-        type:
-          type: string
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        templated:
-          type: boolean
-      required:
-      - href
   responses:
-    Unauthorized:
-      description: The request did not carry a valid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: true
-            message: 'API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs'
-            statusCode: 401
     NotFound:
       description: No such resource.
       content:
@@ -732,6 +722,16 @@ components:
             error: true
             message: Not found.
             statusCode: 404
+    Unauthorized:
+      description: The request did not carry a valid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: 'API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs'
+            statusCode: 401
   securitySchemes:
     apiKey:
       type: apiKey

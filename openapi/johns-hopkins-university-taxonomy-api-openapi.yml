@@ -701,83 +701,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    subcollection:
-      name: subcollection
-      in: path
-      required: true
-      description: Name of the embedded relationship to return as a collection.
-      schema:
-        type: string
-    ids:
-      name: ids
-      in: query
-      required: false
-      description: Return resources with the given IDs.
-      schema:
-        type: string
-      style: form
-      explode: false
-    excluded_ids:
-      name: excluded_ids
-      in: query
-      required: false
-      description: Return resources except those with the given IDs.
-      schema:
-        type: string
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: 'Number of resources to return per page of a collection. Maximum: 100.'
-      schema:
-        type: integer
-        default: 5
-        maximum: 100
-    key:
-      name: key
-      in: query
-      required: true
-      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
-      schema:
-        type: string
-    id:
-      name: id
-      in: path
-      required: true
-      description: Resource ID.
-      schema:
-        type: integer
-    page:
-      name: page
-      in: query
-      required: false
-      description: Return resources from a specific page of a collection.
-      schema:
-        type: integer
-        default: 1
-    order_by:
-      name: order_by
-      in: query
-      required: false
-      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
-      schema:
-        type: string
-    callback:
-      name: callback
-      in: query
-      required: false
-      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
-      schema:
-        type: string
-    v:
-      name: v
-      in: query
-      required: true
-      description: API version. All requests are required to provide a version number. The current API version is 1.
-      schema:
-        type: integer
-        default: 1
   responses:
     Unauthorized:
       description: The request did not carry a valid API key.
@@ -799,44 +722,84 @@ components:
             error: true
             message: Not found.
             statusCode: 404
+  parameters:
+    v:
+      name: v
+      in: query
+      required: true
+      description: API version. All requests are required to provide a version number. The current API version is 1.
+      schema:
+        type: integer
+        default: 1
+    subcollection:
+      name: subcollection
+      in: path
+      required: true
+      description: Name of the embedded relationship to return as a collection.
+      schema:
+        type: string
+    callback:
+      name: callback
+      in: query
+      required: false
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
+      schema:
+        type: string
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
+      schema:
+        type: integer
+        default: 5
+        maximum: 100
+    key:
+      name: key
+      in: query
+      required: true
+      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
+      schema:
+        type: string
+    order_by:
+      name: order_by
+      in: query
+      required: false
+      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      required: false
+      description: Return resources from a specific page of a collection.
+      schema:
+        type: integer
+        default: 1
+    ids:
+      name: ids
+      in: query
+      required: false
+      description: Return resources with the given IDs.
+      schema:
+        type: string
+      style: form
+      explode: false
+    excluded_ids:
+      name: excluded_ids
+      in: query
+      required: false
+      description: Return resources except those with the given IDs.
+      schema:
+        type: string
+    id:
+      name: id
+      in: path
+      required: true
+      description: Resource ID.
+      schema:
+        type: integer
   schemas:
-    Resource:
-      type: object
-      description: A HAL object response containing a single resource. Resource data points vary by resource type; id and type are present on every resource.
-      additionalProperties: true
-      properties:
-        _embedded:
-          type: object
-          description: An object that contains embedded resources.
-          additionalProperties: true
-        _links:
-          $ref: '#/components/schemas/Links'
-        id:
-          type: integer
-        type:
-          type: string
-    Links:
-      type: object
-      description: An object that contains links to related resources.
-      additionalProperties: true
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        find:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
-        prev:
-          $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        templated:
-          type: boolean
-      required:
-      - href
     Collection:
       type: object
       description: A HAL collection response. The requested resources are carried inside _embedded, keyed by the plural resource name.
@@ -868,6 +831,43 @@ components:
       - error
       - message
       - statusCode
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
+      required:
+      - href
+    Links:
+      type: object
+      description: An object that contains links to related resources.
+      additionalProperties: true
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        find:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+        prev:
+          $ref: '#/components/schemas/Link'
+    Resource:
+      type: object
+      description: A HAL object response containing a single resource. Resource data points vary by resource type; id and type are present on every resource.
+      additionalProperties: true
+      properties:
+        _embedded:
+          type: object
+          description: An object that contains embedded resources.
+          additionalProperties: true
+        _links:
+          $ref: '#/components/schemas/Links'
+        id:
+          type: integer
+        type:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey
