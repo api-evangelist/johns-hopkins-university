@@ -495,6 +495,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    person_type:
+      name: type
+      in: query
+      required: false
+      description: 'Return people of a specific type: faculty_expert or media_rep.'
+      schema:
+        type: string
     topics:
       name: topics
       in: query
@@ -502,19 +509,18 @@ components:
       description: 'Return resources assigned to the given topics (comma-separated list of topic IDs). Hierarchical: combine with include_subterms.'
       schema:
         type: string
-    page:
-      name: page
+    key:
+      name: key
       in: query
-      required: false
-      description: Return resources from a specific page of a collection.
+      required: true
+      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
       schema:
-        type: integer
-        default: 1
-    source:
-      name: source
-      in: query
-      required: false
-      description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
+        type: string
+    subcollection:
+      name: subcollection
+      in: path
+      required: true
+      description: Name of the embedded relationship to return as a collection.
       schema:
         type: string
     include_subterms:
@@ -524,11 +530,11 @@ components:
       description: Works with hierarchical taxonomy parameters so that returned resources are assigned to either the specified term(s) or the children of the specified term(s).
       schema:
         type: string
-    divisions:
-      name: divisions
+    order_by:
+      name: order_by
       in: query
       required: false
-      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
+      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
       schema:
         type: string
     v:
@@ -539,18 +545,48 @@ components:
       schema:
         type: integer
         default: 1
-    callback:
-      name: callback
+    event_categories:
+      name: event_categories
       in: query
       required: false
-      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
+      description: Return events assigned to the given event categories (comma-separated list of IDs).
       schema:
         type: string
-    key:
-      name: key
-      in: query
+    id:
+      name: id
+      in: path
       required: true
-      description: API key. All requests to the API are required to authenticate using an API key supplied as the `key` query string parameter.
+      description: Resource ID.
+      schema:
+        type: integer
+    open_to:
+      name: open_to
+      in: query
+      required: false
+      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
+      schema:
+        type: string
+        default: everyone
+    page:
+      name: page
+      in: query
+      required: false
+      description: Return resources from a specific page of a collection.
+      schema:
+        type: integer
+        default: 1
+    divisions:
+      name: divisions
+      in: query
+      required: false
+      description: Return resources assigned to the given divisions (comma-separated list of division IDs).
+      schema:
+        type: string
+    source:
+      name: source
+      in: query
+      required: false
+      description: 'Return articles published by the specified source(s): atwork, hub or magazine.'
       schema:
         type: string
     date:
@@ -560,28 +596,13 @@ components:
       description: Return events that take place on a specific date or within a date range, formatted YYYY-MM-DD[,YYYY-MM-DD].
       schema:
         type: string
-    channels:
-      name: channels
+    callback:
+      name: callback
       in: query
       required: false
-      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
+      description: Wraps the response in a callback function of the given name. Use this parameter to facilitate JSONP requests.
       schema:
         type: string
-    subcollection:
-      name: subcollection
-      in: path
-      required: true
-      description: Name of the embedded relationship to return as a collection.
-      schema:
-        type: string
-    open_to:
-      name: open_to
-      in: query
-      required: false
-      description: 'Return events that may be attended by the given audience(s): faculty, staff, students or everyone.'
-      schema:
-        type: string
-        default: everyone
     locations:
       name: locations
       in: query
@@ -589,41 +610,11 @@ components:
       description: 'Return events assigned to the given locations (comma-separated list of IDs). Hierarchical: combine with include_subterms.'
       schema:
         type: string
-    event_categories:
-      name: event_categories
-      in: query
-      required: false
-      description: Return events assigned to the given event categories (comma-separated list of IDs).
-      schema:
-        type: string
     excluded_ids:
       name: excluded_ids
       in: query
       required: false
       description: Return resources except those with the given IDs.
-      schema:
-        type: string
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: 'Number of resources to return per page of a collection. Maximum: 100.'
-      schema:
-        type: integer
-        default: 5
-        maximum: 100
-    person_type:
-      name: type
-      in: query
-      required: false
-      description: 'Return people of a specific type: faculty_expert or media_rep.'
-      schema:
-        type: string
-    order_by:
-      name: order_by
-      in: query
-      required: false
-      description: Sort by one or more ORDER_BY and ORDER pairs, formatted ORDER_BY|ORDER[,ORDER_BY|ORDER,...]. ORDER is asc or desc. ORDER_BY options include id, list, publish_date and score, depending on the resource.
       schema:
         type: string
     ids:
@@ -635,23 +626,23 @@ components:
         type: string
       style: form
       explode: false
-    id:
-      name: id
-      in: path
-      required: true
-      description: Resource ID.
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: 'Number of resources to return per page of a collection. Maximum: 100.'
       schema:
         type: integer
+        default: 5
+        maximum: 100
+    channels:
+      name: channels
+      in: query
+      required: false
+      description: Return resources assigned to the given channels (comma-separated list of channel IDs).
+      schema:
+        type: string
   schemas:
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        templated:
-          type: boolean
-      required:
-      - href
     Links:
       type: object
       description: An object that contains links to related resources.
@@ -680,6 +671,15 @@ components:
           type: integer
         type:
           type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean
+      required:
+      - href
     Collection:
       type: object
       description: A HAL collection response. The requested resources are carried inside _embedded, keyed by the plural resource name.
@@ -712,16 +712,6 @@ components:
       - message
       - statusCode
   responses:
-    NotFound:
-      description: No such resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: true
-            message: Not found.
-            statusCode: 404
     Unauthorized:
       description: The request did not carry a valid API key.
       content:
@@ -732,6 +722,16 @@ components:
             error: true
             message: 'API requests require authentication. Please see the API documentation for more information: https://api.hub.jhu.edu/docs'
             statusCode: 401
+    NotFound:
+      description: No such resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: true
+            message: Not found.
+            statusCode: 404
   securitySchemes:
     apiKey:
       type: apiKey
