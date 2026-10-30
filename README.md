@@ -1,4 +1,4 @@
-# Johns Hopkins University (johns-hopkins-university)
+# Johns Hopkins University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,97 +64,166 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Johns Hopkins University is a private research university in Baltimore, Maryland, founded in 1876 and ranked #21 in the QS World University Rankings 2026. This repository catalogs its public developer and API footprint as an APIs.json provider profile for the API Evangelist network.
+Johns Hopkins University is a private research university in Baltimore, Maryland, founded in 1876 and ranked #21 in the QS World University Rankings 2026. Its programmable footprint is small but real and, unusually for this cohort, it is genuinely its own: Johns Hopkins operates three APIs on hosts under its own registrable domains and publishes two live machine-readable identity artifacts. The Hub API (api.hub.jhu.edu) serves news, announcements, events, photo galleries and faculty experts from the Hub database across fifteen resource families, and the Self-Service Public Course Search API (sis.jhu.edu/api) returns course catalog data as JSON; both are documented in public but issue keys only to Johns Hopkins affiliates. A MuleSoft Anypoint portal at api.jh.edu fronts integration APIs and is gated entirely. Beyond those, the institution runs a Shibboleth SAML 2.0 identity provider whose metadata it publishes itself at login.jh.edu and which is registered in the InCommon Federation with Research and Scholarship and SIRTFI attributes; Project MUSE, operated by Johns Hopkins University Press, answers OAI-PMH 2.0 over 897,938 harvestable records with no authentication at all — the only fully open machine-readable surface the university has. The Johns Hopkins Research Data Repository (archive.data.jhu.edu) is Dataverse software administered by JHU Data Services, and the university's research portal at pure.johnshopkins.edu is an Elsevier Pure tenancy: both hold Johns Hopkins data, and neither contract is Johns Hopkins engineering. No central public developer portal, no changelog, no deprecation policy and no working status page exist for any of it.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/johns-hopkins-university/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=johns-hopkins-university-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · United States · Private Research University · Association of American Universities · Research · Research Data · Course Catalog · Identity Federation · OAI-PMH · Research Repository
 
-## Type
+## Johns Hopkins University on APIs.io
 
-- University / Private Research University / Index / Consumer / 3rd-Party
+Everything profiled for Johns Hopkins University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/johns-hopkins-university/](https://apis.io/providers/johns-hopkins-university/)** — or go straight to one of the APIs or properties below.
 
-## Who operates what
+### APIs (9)
 
-A university is a federation of buyers, not a producer, so every surface in this profile carries an `x-operator` saying **who runs the thing the contract describes** — not merely where we found it.
+- [Johns Hopkins University SIS Classes API](https://apis.io/apis/johns-hopkins-university/johns-hopkins-university-classes-api/) — Course and section lookup and advanced search against the Self-Service Public Course Search API, which returns the Johns Hopkins course catalog as JSON.…
+- [Johns Hopkins University SIS Codes API](https://apis.io/apis/johns-hopkins-university/johns-hopkins-university-codes-api/) — Reference code lists — schools, terms and departments — from the Self-Service Public Course Search API. The lookup vocabulary that makes the Classes API's…
+- [JHU API Portal (MuleSoft Anypoint)](https://apis.io/apis/johns-hopkins-university/api-portal/) — Central API management platform built on MuleSoft Anypoint, where Johns Hopkins developers and consumers view and request access to enterprise integration…
+- [Johns Hopkins Shibboleth Identity Provider](https://apis.io/apis/johns-hopkins-university/identity-federation/) — Johns Hopkins operates its own Shibboleth SAML 2.0 identity provider and publishes the entity metadata itself at login.jh.edu, scoped to johnshopkins.edu…
+- [Project MUSE OAI-PMH Repository](https://apis.io/apis/johns-hopkins-university/project-muse-oai/) — Project MUSE, operated by Johns Hopkins University Press, exposes an OAI-PMH 2.0 harvesting endpoint that answers Identify, ListMetadataFormats, ListSets…
+- [Johns Hopkins Research Data Repository](https://apis.io/apis/johns-hopkins-university/research-data-repository/) — Institutional research data repository at archive.data.jhu.edu, administered by Johns Hopkins University Data Services within the Sheridan Libraries,…
+- [Johns Hopkins Research Portal (Elsevier Pure tenancy)](https://apis.io/apis/johns-hopkins-university/pure-research-portal/) — The Johns Hopkins research information portal at pure.johnshopkins.edu, which CNAMEs to jhu.elsevierpure.com. This is an Elsevier Pure tenancy: the…
+- [Johns Hopkins University Content API](https://apis.io/apis/johns-hopkins-university/johns-hopkins-university-content-api/) — Content endpoints: announcements, articles, events, files, galleries and people.
+- [Johns Hopkins University Taxonomy API](https://apis.io/apis/johns-hopkins-university/johns-hopkins-university-taxonomy-api/) — Taxonomy endpoints: the vocabularies used to categorize and attribute Hub content.
 
-| Surface | Host | Operator | Contract saved? |
-|---|---|---|---|
-| JHU Hub API | api.hub.jhu.edu | institution | Yes — derived from the operator's own public docs |
-| SIS Classes API | sis.jhu.edu/api | institution | Yes |
-| SIS Codes API | sis.jhu.edu/api | institution | Yes |
-| JHU API Portal (MuleSoft Anypoint) | api.jh.edu | institution | No — catalog gated to affiliates |
-| Shibboleth Identity Provider | login.jh.edu | institution | Yes — SAML 2.0 metadata |
-| Project MUSE OAI-PMH | muse.jhu.edu/oai | institution | Yes — live Identify / ListMetadataFormats |
-| Johns Hopkins Research Data Repository | archive.data.jhu.edu | institution | **No** — Dataverse software; the contract is the Dataverse Project's |
-| Johns Hopkins Research Portal | pure.johnshopkins.edu | **tenant** | **No** — Elsevier Pure tenancy; the contract is Elsevier's |
+### Published properties
 
-Two things deliberately did **not** get credited to Johns Hopkins:
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Dataverse and Pure contracts.** The repository, its data and its DOIs are the institution's. The API contract is the vendor's, and saving it under this slug is exactly the misattribution that produced eight universities scoring the same Figshare document in the June 2026 cohort.
-- **A Figshare tenancy.** `jhu.figshare.com` resolves and answers HTTP 202 — but so does `zzznotarealtenant.figshare.com`. The DNS record is a wildcard, not evidence. No Figshare relationship is claimed.
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **JHU Hub API** — news, announcements, events, photo galleries and faculty experts from the Hub database. Fifteen resource families, each with a collection, object and subcollection endpoint, in HAL JSON. Docs: https://api.hub.jhu.edu/docs/ (API key issued by email to JHU affiliates; `v=1` required)
-- **Self-Service Public Course Search API (SIS)** — course catalog data as JSON, filterable by school, department, course/section number and term. Docs: https://sis.jhu.edu/api/help (API key required)
-- **JHU API Portal (MuleSoft Anypoint)** — enterprise integration APIs, gated to JHU affiliates. https://api.jh.edu/
-- **Shibboleth Identity Provider** — SAML 2.0 IdP metadata published by JHU itself at https://login.jh.edu/idp/shibboleth, scoped to johnshopkins.edu and jh.edu, and registered in InCommon as `urn:mace:incommon:johnshopkins.edu` with Research & Scholarship entity categories and SIRTFI assurance.
-- **Project MUSE OAI-PMH** — operated by Johns Hopkins University Press. 897,938 records across 971 sets in `oai_dc`, **no authentication**. https://muse.jhu.edu/oai?verb=Identify
+- [Johns Hopkins University Agentic Access](https://apis.io/agentic-access/johns-hopkins-university/johns-hopkins-university-agentic-access/)
 
-## Education-regime domain standard conformance
+#### JSON Schema (1)
 
-Scored against the Kin Score `education` regime. Reward-only, and every hit is anchored to a probed URL — see `conformance/johns-hopkins-university-education-standards-conformance.yml`.
+The data models the API reads and writes.
 
-| Standard | Status | Evidence |
-|---|---|---|
-| shibboleth | conformant | `shibmd:Scope` in the IdP metadata at login.jh.edu |
-| saml | conformant | SAML 2.0 `protocolSupportEnumeration`, signed InCommon entity |
-| oai-pmh | conformant | `protocolVersion` 2.0 from muse.jhu.edu/oai |
-| datacite | conformant | DataCite direct member, symbol `JHU`, 8 registered repositories |
-| scim, lti, oneroster, ed-fi, caliper, qti, orcid, crossref | not found | no institution-operated evidence |
+- [Course](https://apis.io/schemas/johns-hopkins-university/johns-hopkins-university-course/)
 
-## Coverage
+#### JSON Structure (1)
 
-`covered` — three institution-operated APIs, two SAML identity artifacts and one fully open OAI-PMH repository all verified live on 2026-08-19. The profile is genuinely thin, not under-researched: key issuance is gated to JHU affiliates on both documented APIs and there is no central public developer portal, no changelog, no deprecation policy and no working status page (`status.jh.edu` returns 500).
+Data models expressed in JSON Structure.
 
-One caveat, and it is about us rather than about them: Cloudflare bot management returns 403 to automated clients across the JHU WordPress estate (`www.jhu.edu`, `ai.jhu.edu`, `it.johnshopkins.edu`, `teaching.jhu.edu`, `press.jhu.edu`) and across `jscholarship.library.jhu.edu` and `archive.data.jhu.edu`. Those hosts grade **live**, not dead — the OAI-PMH endpoint that re3data records for the Research Data Repository simply could not be exercised from here.
+- [Johns Hopkins University Course Structure](https://apis.io/json-structure/johns-hopkins-university/johns-hopkins-university-course-structure/)
 
-## Known defect on the JHU surface
+#### JSON-LD (1)
 
-`GET https://sis.jhu.edu/api/classes` with no key returns **HTTP 500** with the plain-text body `Unable to authenticate: API Key parameter is missing in URL ...`. A missing API key is a client error and belongs at 401 or 403. As it stands an agent cannot tell an auth failure from a server outage without parsing prose. See `errors/johns-hopkins-university-errors.yml`.
+Linked-data contexts for the provider's vocabulary.
 
-## Artifacts
+- [Johns Hopkins University Context](https://apis.io/jsonld/johns-hopkins-university/johns-hopkins-university-context/)
 
-- `openapi/` — SIS Classes, SIS Codes, and the Hub API (all `method: derived` from the operators' published documentation, with pristine copies in `openapi/_original/`)
-- `identity-federation/` — IdP + InCommon SAML metadata, and a manifest of entity IDs, bindings and scopes
-- `conformance/` — education-regime standard conformance with per-standard evidence, plus raw OAI-PMH responses
-- `errors/`, `lifecycle/`, `json-schema/`, `json-structure/`, `json-ld/`, `vocabulary/`, `rules/`, `examples/`, `collections/`, `authentication/`, `agentic-access/`, `plans/`, `rate-limits/`, `finops/`, `security/`
+#### Vocabulary (1)
 
-Every artifact carries `generated`, `method` and `source`. Nothing here is published by Johns Hopkins University.
+The provider's domain terms, defined.
 
-## Timestamps
+- [JHU SIS Public Course Search Vocabulary](https://apis.io/vocabularies/johns-hopkins-university/johns-hopkins-university-vocabulary/)
 
-- Created: 2026-06-03
-- Modified: 2026-08-19
+#### Examples (3)
 
-## Common Properties
+Example requests and responses.
 
-- Website: https://www.jhu.edu/
-- Developer Portal: https://api.jh.edu/
-- API Reference: https://api.hub.jhu.edu/docs/
-- Course Catalog: https://sis.jhu.edu/api/help
-- Research Repository: https://archive.data.jhu.edu/
-- Research Computing: https://www.arch.jhu.edu/
-- Open Data / Data Services: https://dataservices.library.jhu.edu/
-- AI Policy: https://teaching.jhu.edu/university-teaching-policies/generative-ai/guidelines/
-- GitHub: https://github.com/johnshopkins, https://github.com/jhu-data-services, https://github.com/JHUAPL
-- LinkedIn: https://www.linkedin.com/school/johns-hopkins-university/
-- ROR: https://ror.org/00za53h95
+- [Johns Hopkins University Advanced Search Example](https://apis.io/examples/johns-hopkins-university/johns-hopkins-university-advanced-search-example/)
+- [Johns Hopkins University Hub Article Example](https://apis.io/examples/johns-hopkins-university/johns-hopkins-university-hub-article-example/)
+- [Johns Hopkins University Schools Example](https://apis.io/examples/johns-hopkins-university/johns-hopkins-university-schools-example/)
 
-## Notes
+#### Collections (2)
 
-Re-profiled 2026-08-19 under the API Evangelist university pipeline, which settles operator attribution before saving any contract. No endpoint was fabricated. The Hub API OpenAPI was derived from the operator's own documentation at https://api.hub.jhu.edu/docs/ and was not executed, because key issuance is restricted to Johns Hopkins affiliates.
+Postman and Open Collection request collections.
 
-## Maintainers
+- [Self-Service Public Course Search API (SIS) Classes API](https://apis.io/collections/johns-hopkins-university/open-johns-hopkins-university-classes-api/)
+- [Self-Service Public Course Search API (SIS) Classes Codes API](https://apis.io/collections/johns-hopkins-university/open-johns-hopkins-university-codes-api/)
 
-- Kin Lane — kin@apievangelist.com
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Johns Hopkins University — jsonschema rules](https://apis.io/rules/johns-hopkins-university/johns-hopkins-university-jsonschema-spectral-rules/)
+- [Johns Hopkins University API Rules](https://apis.io/rules/johns-hopkins-university/johns-hopkins-university-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Johns Hopkins University Authentication](https://apis.io/security/johns-hopkins-university/johns-hopkins-university-authentication/)
+- [Johns Hopkins University Domain Security](https://apis.io/security/johns-hopkins-university/johns-hopkins-university-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Johns Hopkins University Plans Pricing](https://apis.io/plans/johns-hopkins-university/johns-hopkins-university-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Johns Hopkins University Rate Limits](https://apis.io/rate-limits/johns-hopkins-university/johns-hopkins-university-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Johns Hopkins University Finops](https://apis.io/finops/johns-hopkins-university/johns-hopkins-university-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.jhu.edu/)
+- [Documentation](https://sis.jhu.edu/api/help)
+- [API reference](https://api.hub.jhu.edu/docs/)
+- [Blog](https://hub.jhu.edu/)
+- [GitHub](https://github.com/johnshopkins)
+
+## API Evangelist rating
+
+**Kin Score 32.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 55.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 5.3 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/johns-hopkins-university/](https://apis.io/providers/johns-hopkins-university/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Johns Hopkins University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/johns-hopkins-university/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
